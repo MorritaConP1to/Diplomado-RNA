@@ -89,23 +89,46 @@ def crear_tag_numero(nombre, numero_favorito):
     tag = nombre[:5] + str(numero_favorito)
     return tag
 
-def mostrar_estadisticas(nombre,apellido,numero_favorito):
+def mostrar_estadisticas(nombre,apellido ,numero_favorito):
     """Función que muestra las estadísticas de uso de cada tipo de GamerTag generado."""
     # La función muestra un resumen de cuántos GamerTags de cada tipo se han generado.
     # Esto puede ayudar al usuario que tipos de GamerTags son más populares o utilizados.
     # Muestra el nombre completo asi como la longitud del nombre del jugador.
     # muestra la primera letra del nombre y la primera letra del apellido.
+    print("\nEstadisticas de tu nombre:")
     print(f"Nombre completo: {nombre} {apellido}")
-    print(f"Longitud del nombre: {len(nombre)}")
-    print(f"Primera letra del nombre: {nombre[0]}")
-    print(f"Primera letra del apellido: {apellido[0]}")
+    print(f"Longitud del tu nombre: {len(nombre)}")
+    print(f"Primera letra de tu nombre: {nombre[0]}")
+    print(f"Ultima letra de tu nombre: {nombre[-1]}")
+    print(f"Primera letra de tu apellido: {apellido[0]}")
     print(f"Número favorito: {numero_favorito}")
+"""
+
     print(crear_tag_basico(nombre), sep="")
     print(crear_tag_invertido(nombre), sep="")
     print(crear_tag_intercalado(nombre,apellido), sep="")
     print(crear_tag_elite(nombre), sep="")
     print(crear_tag_numero(nombre, numero_favorito), sep="")
+    """
 
+def mostar_todas_las_tags(nombre, apellido, numero_favorito):
+    """Función que muestra todas las tags generadas en una tabla."""
+    # La función muestra todas las tags generadas en una tabla utilizando la biblioteca tabulate.
+    # Esto proporciona una presentación clara y organizada de los diferentes tipos de GamerTags generados.
+    tags = [
+        ["Tag Básico", crear_tag_basico(nombre)],
+        ["Tag Invertido", crear_tag_invertido(nombre)],
+        ["Tag Intercalado", crear_tag_intercalado(nombre, apellido)],
+        ["Tag Élité", crear_tag_elite(nombre)],
+        ["Tag con Número", crear_tag_numero(nombre, numero_favorito)]
+    ]
+    print("\nTus GamerTags Generados:")
+    print(tabulate(tags, headers=["Tipo de Tag", "GamerTag"], tablefmt="grid"))
 
-mostrar_estadisticas(input("Ingrese su nombre: "), input("Ingrese su apellido: "), int(input("Ingrese su número favorito: ")))
-
+# El programa comienza ejecutando la función cabecera para mostrar la cabecera del programa.
+cabecera()
+# Luego, se solicita al usuario que ingrese su nombre, apellido y número favorito
+nombre = input("Ingresa tu nombre: ")
+apellido = input("Ingresa tu apellido: ")
+numero_favorito = int(input("Ingresa tu número favorito: "))
+# Después de obtener la información del usuario, se llama a la función mostrar_estadisticas para
