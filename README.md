@@ -11,4 +11,4 @@ Esta dividido por modulos vistos junto a sus ejericios
 ### Requisitos
 
 - Python 3.xx (En la escuela usamos 3.11.14, pero funciona en versiones recientes)
-- No se requieren librerios externas para los ejercicios basicos
+- No se requieren librerias externas para los ejercicios basicos
