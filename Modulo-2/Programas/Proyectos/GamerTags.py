@@ -131,4 +131,9 @@ cabecera()
 nombre = input("Ingresa tu nombre: ")
 apellido = input("Ingresa tu apellido: ")
 numero_favorito = int(input("Ingresa tu número favorito: "))
-# Después de obtener la información del usuario, se llama a la función mostrar_estadisticas para
+# Después de obtener la información del usuario, se llama a la función mostrar_estadisticas
+# para mostrar las estadísticas relacionadas con el nombre del jugador.
+mostrar_estadisticas(nombre, apellido, numero_favorito)
+# Finalmente, se llama a la función mostar_todas_las_tags para mostrar todas las
+# tags generadas en una tabla organizada.
+mostar_todas_las_tags(nombre, apellido, numero_favorito)
