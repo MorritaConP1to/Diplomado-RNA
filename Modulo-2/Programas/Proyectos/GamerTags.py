@@ -1,29 +1,36 @@
-from posixpath import sep
-from tabulate import tabulate
+import tabulate
+import pyfiglet
+from colorama import Fore
 
 def cabecera():
+    
     """Función que muestra la cabecera del Generador de Tags de Jugadores."""
     # La función imprime un título artístico que representa el nombre del programa.
     # El título está diseñado con caracteres especiales para darle un aspecto llamativo y distintivo.
     # Se usa esta pagina "https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type+Something+&x=none&v=4&h=4&w=80&we=false"
     # Se le coloca la r antes del string para que se muestre tal cual, sin interpretar caracteres especiales como saltos de línea o tabulaciones.
-    titulo = r"""  ______                                            ________                             
- /      \                                          |        \                            
-|  $$$$$$\  ______   ______ ____    ______    ______\$$$$$$$$______    ______    _______ 
-| $$ __\$$ |      \ |      \    \  /      \  /      \ | $$  |      \  /      \  /       \
-| $$|    \  \$$$$$$\| $$$$$$\$$$$\|  $$$$$$\|  $$$$$$\| $$   \$$$$$$\|  $$$$$$\|  $$$$$$$
-| $$ \$$$$ /      $$| $$ | $$ | $$| $$    $$| $$   \$$| $$  /      $$| $$  | $$ \$$    \ 
-| $$__| $$|  $$$$$$$| $$ | $$ | $$| $$$$$$$$| $$      | $$ |  $$$$$$$| $$__| $$ _\$$$$$$\
- \$$    $$ \$$    $$| $$ | $$ | $$ \$$     \| $$      | $$  \$$    $$ \$$    $$|       $$
-  \$$$$$$   \$$$$$$$ \$$  \$$  \$$  \$$$$$$$ \$$       \$$   \$$$$$$$ _\$$$$$$$ \$$$$$$$ 
-                                                                     |  \__| $$          
-                                                                      \$$    $$          
-                                                                       \$$$$$$           
-                                 !Crea tu propio GamerTag!                              
-                                                                       
-                                                                       
-                                                                       """
-    print(titulo)
+#    titulo = r"""  ______                                            ________                             
+# /      \                                          |        \                            
+#|  $$$$$$\  ______   ______ ____    ______    ______\$$$$$$$$______    ______    _______ 
+#| $$ __\$$ |      \ |      \    \  /      \  /      \ | $$  |      \  /      \  /       \
+#| $$|    \  \$$$$$$\| $$$$$$\$$$$\|  $$$$$$\|  $$$$$$\| $$   \$$$$$$\|  $$$$$$\|  $$$$$$$
+#| $$ \$$$$ /      $$| $$ | $$ | $$| $$    $$| $$   \$$| $$  /      $$| $$  | $$ \$$    \ 
+#| $$__| $$|  $$$$$$$| $$ | $$ | $$| $$$$$$$$| $$      | $$ |  $$$$$$$| $$__| $$ _\$$$$$$\
+# \$$    $$ \$$    $$| $$ | $$ | $$ \$$     \| $$      | $$  \$$    $$ \$$    $$|       $$
+#  \$$$$$$   \$$$$$$$ \$$  \$$  \$$  \$$$$$$$ \$$       \$$   \$$$$$$$ _\$$$$$$$ \$$$$$$$ 
+#                                                                    |  \__| $$          
+#                                                                      \$$    $$          
+#                                                                       \$$$$$$           
+#                                 !Crea tu propio GamerTag!                              
+#                                                                       
+#                                                                       
+#                                                                       """
+#    print(titulo)                      Version 2.0 con un nuevo diseño usando pyfiglet para generar el título artístico.
+    titulo = pyfiglet.figlet_format("GamerTag", font="3-D")
+    print(Fore.MAGENTA + titulo)
+    print("¡Crea tu propio GamerTag!")
+    return
+    
 
 def crear_tag_basico(nombre):
     """Función que crea un GamerTag básico a partir del nombre del jugador.
@@ -95,23 +102,29 @@ def mostrar_estadisticas(nombre,apellido ,numero_favorito):
     # Esto puede ayudar al usuario que tipos de GamerTags son más populares o utilizados.
     # Muestra el nombre completo asi como la longitud del nombre del jugador.
     # muestra la primera letra del nombre y la primera letra del apellido.
-    print("\nEstadisticas de tu nombre:")
-    print(f"Nombre completo: {nombre} {apellido}")
-    print(f"Longitud del tu nombre: {len(nombre)}")
-    print(f"Primera letra de tu nombre: {nombre[0]}")
-    print(f"Ultima letra de tu nombre: {nombre[-1]}")
-    print(f"Primera letra de tu apellido: {apellido[0]}")
-    print(f"Número favorito: {numero_favorito}")
-"""
+    #print("\nEstadisticas de tu nombre:")  #v1 donde metemos todo por varios print, pero se ve desorganizado y poco atractivo visualmente.
+    #print(f"Nombre completo: {nombre} {apellido}")
+    #print(f"Longitud del tu nombre: {len(nombre)}")
+    #print(f"Primera letra de tu nombre: {nombre[0]}")
+    #print(f"Ultima letra de tu nombre: {nombre[-1]}")
+    #print(f"Primera letra de tu apellido: {apellido[0]}")
+    #print(f"Número favorito: {numero_favorito}")
+    
+    tags = [ #v2 donde metemos todo a una tabla usando la biblioteca tabulate para mostrar las cosas más organizada y visualmente atractiva.
+        ["Nombre completo", (nombre) + " " + (apellido)],
+        ["Longitud del nombre", len(nombre)],
+        ["Primera letra del nombre", nombre[0]],
+        ["Última letra del nombre", nombre[-1]],
+        ["Primera letra del apellido", apellido[0]],
+        ["Número favorito", numero_favorito]
+    ]
+    
+    print("\nResumen de tus estadísticas:")
+    print(tabulate.tabulate(tags, headers=["Estadística", "Valor"], tablefmt="grid"))
+    
 
-    print(crear_tag_basico(nombre), sep="")
-    print(crear_tag_invertido(nombre), sep="")
-    print(crear_tag_intercalado(nombre,apellido), sep="")
-    print(crear_tag_elite(nombre), sep="")
-    print(crear_tag_numero(nombre, numero_favorito), sep="")
-    """
 
-def mostar_todas_las_tags(nombre, apellido, numero_favorito):
+def mostrar_todas_las_tags(nombre, apellido, numero_favorito):
     """Función que muestra todas las tags generadas en una tabla."""
     # La función muestra todas las tags generadas en una tabla utilizando la biblioteca tabulate.
     # Esto proporciona una presentación clara y organizada de los diferentes tipos de GamerTags generados.
@@ -122,8 +135,15 @@ def mostar_todas_las_tags(nombre, apellido, numero_favorito):
         ["Tag Élité", crear_tag_elite(nombre)],
         ["Tag con Número", crear_tag_numero(nombre, numero_favorito)]
     ]
-    print("\nTus GamerTags Generados:")
-    print(tabulate(tags, headers=["Tipo de Tag", "GamerTag"], tablefmt="grid"))
+    print("\nTus posibles GamerTags son:")
+    print(tabulate.tabulate(tags, headers=["Tipo de Tag", "GamerTag"], tablefmt="grid"))
+    
+def mostrar_todo_junto(nombre, apellido, numero_favorito): #v2.0 de poner oh mostrar todo
+    """Función que muestra la cabecera, estadísticas y todas las tags generadas."""
+    # La función muestra la cabecera del programa, las estadísticas del jugador y todas las tags generadas en una sola función.
+    # Esto proporciona una experiencia de usuario más fluida y conveniente al mostrar toda la información relevante en un solo lugar.
+    mostrar_estadisticas(nombre, apellido, numero_favorito)
+    mostrar_todas_las_tags(nombre, apellido, numero_favorito)
 
 # El programa comienza ejecutando la función cabecera para mostrar la cabecera del programa.
 cabecera()
@@ -133,7 +153,8 @@ apellido = input("Ingresa tu apellido: ")
 numero_favorito = int(input("Ingresa tu número favorito: "))
 # Después de obtener la información del usuario, se llama a la función mostrar_estadisticas
 # para mostrar las estadísticas relacionadas con el nombre del jugador.
-mostrar_estadisticas(nombre, apellido, numero_favorito)
-# Finalmente, se llama a la función mostar_todas_las_tags para mostrar todas las
+#mostrar_estadisticas(nombre, apellido, numero_favorito)
+mostrar_todo_junto(nombre, apellido, numero_favorito) #v2.0 donde mostramos todo junto en 2 tablas
+# Finalmente, se llama a la función mostrar_todas_las_tags para mostrar todas las
 # tags generadas en una tabla organizada.
-mostar_todas_las_tags(nombre, apellido, numero_favorito)
+#mostrar_todas_las_tags(nombre, apellido, numero_favorito)
