@@ -111,4 +111,4 @@ print("Valores solo de referencia \nConsulte a su medico")
 ##Calorias_hombre =  88.362 + (13.397 * peso) + (4.799 * altura) - (5.677 * edad)
 ##Calorias_mujer = 447.593 + (9.247 * peso) + (3.098 * altura) - (4.330 * edad)
 
-##print("Diferiencia de imc" ,Calorias_hombre,Calorias_mujer)
+##print("Diferiencia de calorias" ,Calorias_hombre,Calorias_mujer)
