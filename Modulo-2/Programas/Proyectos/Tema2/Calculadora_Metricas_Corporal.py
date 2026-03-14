@@ -107,7 +107,7 @@ ritmo_cardiaco_maximo = calcular_ritmo_cardiaco_maximo(edad)
 print("Tu ritmo cardíaco Maximo debe ser de:", str(ritmo_cardiaco_maximo) + " ppm")
 print("Valores solo de referencia \n Consulte a su medico")
 
-Calorias_hombre =  88.362 + (13.397 * peso) + (4.799 * altura) - (5.677 * edad)
-Calorias_mujer = 447.593 + (9.247 * peso) + (3.098 * altura) - (4.330 * edad)
+##Calorias_hombre =  88.362 + (13.397 * peso) + (4.799 * altura) - (5.677 * edad)
+##Calorias_mujer = 447.593 + (9.247 * peso) + (3.098 * altura) - (4.330 * edad)
 
-print("Diferiencia de imc" ,Calorias_hombre,Calorias_mujer)
+##print("Diferiencia de imc" ,Calorias_hombre,Calorias_mujer)
