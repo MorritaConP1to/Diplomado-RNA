@@ -18,7 +18,7 @@ def calcular_imc(peso_kg, altura_m):
     Retorna:
     float: El IMC calculado
     """
-    imc = peso_kg / (altura_m ** 2)
+    imc = peso_kg / pow(altura_m,2)
     return imc 
 
 def es_peso_saludable(imc):
@@ -84,12 +84,13 @@ def calcular_ritmo_cardiaco_maximo(edad):
 
 print("Bienvenido a la Calculadora de Fitness y Salud Personal")
 print("Por favor, ingresa tus datos para calcular tus métricas corporales.")
-
+nombre = input("Ingresa tu nombre: ")
 peso = float(input("Ingresa tu peso en kg: "))
 altura = float(input("Ingresa tu altura en cm: "))/100 # Convertir cm a m
 edad = int(input("Ingresa tu edad: "))
 sexo = input("Ingresa tu sexo (hombre/mujer): ")
 print("\nCalculando tus métricas corporales...")
+print("Muy bien ",nombre+" Aca estan tus datos:")
 imc = calcular_imc(peso, altura)
 print("Tu IMC es:", round(imc,2))
 if es_peso_saludable(imc):
@@ -105,7 +106,7 @@ agua_diaria = calcular_agua_diaria(peso)
 print("Litros de agua recomendados al día:", str(agua_diaria)+" Lts")
 ritmo_cardiaco_maximo = calcular_ritmo_cardiaco_maximo(edad)
 print("Tu ritmo cardíaco Maximo debe ser de:", str(ritmo_cardiaco_maximo) + " ppm")
-print("Valores solo de referencia \n Consulte a su medico")
+print("Valores solo de referencia \nConsulte a su medico")
 
 ##Calorias_hombre =  88.362 + (13.397 * peso) + (4.799 * altura) - (5.677 * edad)
 ##Calorias_mujer = 447.593 + (9.247 * peso) + (3.098 * altura) - (4.330 * edad)
