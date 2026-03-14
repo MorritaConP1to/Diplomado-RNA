@@ -66,7 +66,7 @@ def calcular_calorias_diarias(peso_kg, altura_cm, edad, es_hombre):
             calorias = 88.362 + (13.397 * peso_kg) + (4.799 * altura_cm) - (5.677 * edad)
     else:
             calorias = 447.593 + (9.247 * peso_kg) + (3.098 * altura_cm) - (4.330 * edad)
-    return calorias
+    return calorias #es_hombre * calorias_hombre + (1 - es_hombre) * calorias_mujer  usamos comparador booleano para mejorar oh acortar
 
 def calcular_agua_diaria(peso_kg):
     """
