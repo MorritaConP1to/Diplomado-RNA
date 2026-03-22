@@ -1,6 +1,5 @@
 ##Calculadora de metricas corporales
 ## Calcular indicadores de dalud y fitnes
-8
 # ==========================================
 
 # CALCULADORA DE FITNESS Y SALUD PERSONAL
