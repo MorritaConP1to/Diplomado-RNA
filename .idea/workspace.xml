@@ -18,11 +18,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="901eb00b-8444-4999-a90c-f796a87ec68d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Modulo-2/Notebooks/Tema4/Reg_Lineal_Pred_Costo_CiberSeguridad.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Diplomado-RNA.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Diplomado-RNA.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="901eb00b-8444-4999-a90c-f796a87ec68d" name="Changes" comment="Aun faltan mas ejemplos, y ejercicios">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/db-forest-config.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modulo-2/Notebooks/Tema4/Regresion-Lineal-Scikitlearn.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Modulo-2/Notebooks/Tema4/Regresion-Lineal-Scikitlearn.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +30,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="89" />
+    <option name="cachedIndexableFilesCount" value="99" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -40,22 +40,27 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="MorritaConP1to@proton.me &lt;morritaconp1to@proton.me&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "history": [
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
     {
-      "state": "OPEN"
+      &quot;state&quot;: &quot;OPEN&quot;
     }
   ],
-  "lastFilter": {}
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/MorritaConP1to/Diplomado-RNA.git",
-    "accountId": "92053d4b-f844-4214-b747-f09079747e43"
+  &quot;lastFilter&quot;: {}
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MorritaConP1to/Diplomado-RNA.git&quot;,
+    &quot;accountId&quot;: &quot;92053d4b-f844-4214-b747-f09079747e43&quot;
   }
-}]]></component>
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -75,6 +80,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ai.playground.ignore.import.keys.banner.in.settings": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
@@ -107,11 +113,37 @@
       <option name="presentableId" value="Default" />
       <updated>1772925646587</updated>
       <workItem from="1772925647767" duration="53000" />
-      <workItem from="1774654260337" duration="7732000" />
+      <workItem from="1774654260337" duration="7991000" />
+      <workItem from="1774707978580" duration="12084000" />
     </task>
+    <task id="LOCAL-00001" summary="Aun faltan mas ejemplos, y ejercicios">
+      <option name="closed" value="true" />
+      <created>1774662302730</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1774662302730</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="Aun faltan mas ejemplos, y ejercicios" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aun faltan mas ejemplos, y ejercicios" />
   </component>
 </project>
