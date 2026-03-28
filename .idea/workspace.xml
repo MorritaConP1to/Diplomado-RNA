@@ -1,20 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AIAssistantCustomInstructionsStorage">
+    <option name="instructions">
+      <map>
+        <entry key="AIAssistant.General.ProjectPrompt">
+          <value>
+            <AIAssistantStoredInstruction>
+              <option name="actionId" value="AIAssistant.General.ProjectPrompt" />
+              <option name="content" value="Eres un asistente de programación para mi diplomado de Redes Neuronales &#10;y Deep Learning. Trabajo en Python con scikit-learn, PyTorch, NumPy, &#10;Pandas y Matplotlib. Explica en español, de forma clara y con ejemplos &#10;prácticos. Cuando corrijas código, explica por qué está mal y cómo mejorarlo." />
+            </AIAssistantStoredInstruction>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="901eb00b-8444-4999-a90c-f796a87ec68d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modulo-2/Notebooks/Tema4/Reg_Lineal_Pred_Costo_CiberSeguridad.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Diplomado-RNA.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Diplomado-RNA.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="89" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jupyter Notebook" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "history": [
+    {
+      "state": "OPEN"
+    }
+  ],
+  "lastFilter": {}
 }]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/MorritaConP1to/Diplomado-RNA.git",
+    "accountId": "92053d4b-f844-4214-b747-f09079747e43"
+  }
+}]]></component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="3AdbyFmJKOEuinrvDKrAheCc9eB" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -23,6 +71,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
@@ -31,7 +80,13 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "F:/Diplomado-RNA",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "ml.llm.AIAssistantPromptsLibrary",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -39,8 +94,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.31033.139" />
-        <option value="bundled-python-sdk-2653e85de345-6d6dccd035ac-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.31033.139" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.32098.74" />
+        <option value="bundled-python-sdk-1cd77e80b48f-6d6dccd035ac-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.32098.74" />
       </set>
     </attachedChunks>
   </component>
@@ -52,6 +107,7 @@
       <option name="presentableId" value="Default" />
       <updated>1772925646587</updated>
       <workItem from="1772925647767" duration="53000" />
+      <workItem from="1774654260337" duration="7732000" />
     </task>
     <servers />
   </component>
