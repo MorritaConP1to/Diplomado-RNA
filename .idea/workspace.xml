@@ -18,11 +18,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="901eb00b-8444-4999-a90c-f796a87ec68d" name="Changes" comment="Aun faltan mas ejemplos, y ejercicios">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/db-forest-config.xml" afterDir="false" />
+    <list default="true" id="901eb00b-8444-4999-a90c-f796a87ec68d" name="Changes" comment="Primer caso de Neurona">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modulo-2/Notebooks/Tema4/Regresion-Lineal-Scikitlearn.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Modulo-2/Notebooks/Tema4/Regresion-Lineal-Scikitlearn.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modulo-2/Notebooks/Tema4/Reg_Lineal_Pred_Costo_CiberSeguridad.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Modulo-2/Notebooks/Tema4/Reg_Lineal_Pred_Costo_CiberSeguridad.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +28,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="99" />
+    <option name="cachedIndexableFilesCount" value="104" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -92,7 +90,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "ml.llm.AIAssistantPromptsLibrary",
+    "settings.editor.selected.configurable": "ml.llm.LLMThirdPartyAiProvidersConfigurable",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -114,7 +112,11 @@
       <updated>1772925646587</updated>
       <workItem from="1772925647767" duration="53000" />
       <workItem from="1774654260337" duration="7991000" />
-      <workItem from="1774707978580" duration="12084000" />
+      <workItem from="1774707978580" duration="12237000" />
+      <workItem from="1774720338732" duration="6984000" />
+      <workItem from="1774730580506" duration="225000" />
+      <workItem from="1774730822965" duration="1771000" />
+      <workItem from="1774742167699" duration="617000" />
     </task>
     <task id="LOCAL-00001" summary="Aun faltan mas ejemplos, y ejercicios">
       <option name="closed" value="true" />
@@ -124,7 +126,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774662302730</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Ejercicio Para terminar">
+      <option name="closed" value="true" />
+      <created>1774720256309</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1774720256309</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Primer caso de Neurona">
+      <option name="closed" value="true" />
+      <created>1774727320253</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1774727320253</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,6 +162,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
     <MESSAGE value="Aun faltan mas ejemplos, y ejercicios" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aun faltan mas ejemplos, y ejercicios" />
+    <MESSAGE value="Ejercicio Para terminar" />
+    <MESSAGE value="Primer caso de Neurona" />
+    <option name="LAST_COMMIT_MESSAGE" value="Primer caso de Neurona" />
   </component>
 </project>

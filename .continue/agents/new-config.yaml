@@ -1,0 +1,30 @@
+# This is an example configuration file
+# To learn more, see the full config.yaml reference: https://docs.continue.dev/reference
+
+name: Local Config
+version: 1.0.0
+schema: v1
+models:
+  - name: DeepSeek Coder
+    provider: ollama
+    model: deepseek-coder:6.7b
+    apiBase: http://192.168.100.194:11434
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: CodeLlama
+    provider: ollama
+    model: codellama:7b
+    apiBase: http://192.168.100.194:11434
+    roles:
+      - chat
+      - edit
+
+  - name: Llama rapido
+    provider: ollama
+    model: llama3.2:1b
+    apiBase: http://192.168.100.194:11434
+    roles:
+      - autocomplete
