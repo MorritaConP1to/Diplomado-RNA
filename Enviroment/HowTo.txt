@@ -1,0 +1,11 @@
+# 1. Clonar tu repo (o hacer pull si ya lo tienes)
+git clone https://github.com/MorritaConP1to/tu-repo.git
+
+# 2. Crear el entorno desde el archivo
+conda env create -f environment.yml
+
+# 3. Activarlo
+conda activate diplomado-redes
+
+# 4. Registrarlo en VSCode
+python -m ipykernel install --user --name diplomado-redes --display-name "Python (diplomado-redes)"

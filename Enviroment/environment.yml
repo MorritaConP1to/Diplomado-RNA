@@ -1,0 +1,116 @@
+# ============================================================
+# Entorno conda para el Diplomado Superior en Redes Neuronales
+# Artificiales y Deep Learning — UAEM
+# ============================================================
+# Instalación:
+#   conda env create -f environment.yml
+#
+# Activación:
+#   conda activate diplomado-redes
+#
+# Registrar como kernel en VSCode:
+#   python -m ipykernel install --user --name diplomado-redes --display-name "Python (diplomado-redes)"
+#
+# Actualizar si se agrega algo nuevo al archivo:
+#   conda env update -f environment.yml --prune
+# ============================================================
+
+name: diplomado-redes
+
+channels:
+  - conda-forge
+  - pytorch
+  - defaults
+
+dependencies:
+  # ------------------------------------------------------------
+  # Python
+  # ------------------------------------------------------------
+  - python=3.11
+
+  # ------------------------------------------------------------
+  # Módulo II — Python para IA
+  # Fundamentos: numpy, pandas, matplotlib
+  # ------------------------------------------------------------
+  - numpy                # Operaciones numéricas y álgebra lineal
+  - pandas               # Manipulación de DataFrames y datos tabulares
+  - matplotlib           # Visualización de datos básica
+  - scipy                # Funciones matemáticas avanzadas y estadística
+
+  # ------------------------------------------------------------
+  # Módulo II + III — Visualización avanzada
+  # ------------------------------------------------------------
+  - seaborn              # Mapas de calor, gráficas estadísticas (heatmaps, etc.)
+  - plotly               # Gráficas interactivas
+
+  # ------------------------------------------------------------
+  # Módulo III — Machine Learning
+  # Regresión, clasificación, clustering, métricas
+  # ------------------------------------------------------------
+  - scikit-learn         # Modelos ML: regresión, SVM, árboles, K-means, métricas
+  - imbalanced-learn     # Manejo de datasets desbalanceados (útil en clasificación)
+  - xgboost              # Gradient boosting (modelo poderoso de clasificación)
+
+  # ------------------------------------------------------------
+  # Módulo IV — Deep Learning con TensorFlow/Keras
+  # CNNs, RNNs, Transformers, GANs, Autoencoders
+  # ------------------------------------------------------------
+  - tensorflow           # Framework principal de deep learning
+  - keras                # API de alto nivel incluida en TensorFlow
+
+  # ------------------------------------------------------------
+  # Módulo IV — Deep Learning con PyTorch
+  # Alternativa a TensorFlow (el temario menciona ambos)
+  # ------------------------------------------------------------
+  - pytorch              # Framework PyTorch
+  - torchvision          # Datasets y modelos para visión por computadora
+  - torchaudio           # Procesamiento de audio con PyTorch
+  - cpuonly              # Sin CUDA (ajustar si tienes GPU compatible)
+
+  # ------------------------------------------------------------
+  # Módulo IV — Procesamiento de Lenguaje Natural (NLP)
+  # Transformers, embeddings, tokenización
+  # ------------------------------------------------------------
+  - nltk                 # Tokenización, stemming, corpus básicos de NLP
+  - spacy                # NLP avanzado: entidades, parsing, modelos de lenguaje
+
+  # ------------------------------------------------------------
+  # Módulo IV — Visión por Computadora
+  # CNN, preprocesamiento de imágenes
+  # ------------------------------------------------------------
+  - pillow               # Manejo y transformación de imágenes (PIL)
+
+  # ------------------------------------------------------------
+  # Módulo V — Sistemas Embebidos / Arduino
+  # Comunicación serial con Arduino desde Python
+  # ------------------------------------------------------------
+  - pyserial             # Comunicación serial con Arduino y otros dispositivos
+
+  # ------------------------------------------------------------
+  # Jupyter y entorno de trabajo (todos los módulos)
+  # ------------------------------------------------------------
+  - jupyter              # Notebooks clásicos
+  - jupyterlab           # JupyterLab (interfaz moderna)
+  - notebook             # Backend de notebooks
+  - ipykernel            # Registrar el entorno como kernel en VSCode
+  - ipywidgets           # Widgets interactivos en notebooks (sliders, botones)
+
+  # ------------------------------------------------------------
+  # Utilidades generales (todos los módulos)
+  # ------------------------------------------------------------
+  - tqdm                 # Barras de progreso en loops de entrenamiento
+  - requests             # Peticiones HTTP (descargar datasets, APIs)
+  - pyyaml               # Leer archivos de configuración .yml
+  - joblib               # Guardar y cargar modelos entrenados
+
+  # ------------------------------------------------------------
+  # pip: librerías no disponibles en conda o más actualizadas ahí
+  # ------------------------------------------------------------
+  - pip
+  - pip:
+    - ucimlrepo           # Módulo II/III: cargar datasets de UCI Machine Learning Repository
+    - opencv-python       # Módulo IV: procesamiento avanzado de imágenes (CNNs)
+    - transformers        # Módulo IV: modelos Transformer preentrenados (HuggingFace)
+    - datasets            # Módulo IV: datasets de HuggingFace para NLP
+    - torch-summary       # Módulo IV: resumen visual de arquitecturas PyTorch
+    - tensorflow-datasets # Módulo IV: datasets listos para usar con TensorFlow
