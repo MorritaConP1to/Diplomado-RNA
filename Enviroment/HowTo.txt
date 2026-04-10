@@ -9,3 +9,10 @@ conda activate diplomado-redes
 
 # 4. Registrarlo en VSCode
 python -m ipykernel install --user --name diplomado-redes --display-name "Python (diplomado-redes)"
+
+# 5. En caso de error:
+	conda activate diplomado-redes
+	pip install --upgrade seaborn 
+	else
+	pip install "seaborn>=0.13.0" "matplotlib>=3.7,<3.9"
+Después de instalarlo, reinicia el kernel en VSCode (el botón Restart que aparece arriba del notebook)
