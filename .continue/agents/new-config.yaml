@@ -8,7 +8,7 @@ models:
   - name: DeepSeek Coder
     provider: ollama
     model: deepseek-coder:6.7b
-    apiBase: http://192.168.100.194:11434
+    apiBase: http://192.168.100.154:11434
     roles:
       - chat
       - edit
@@ -17,7 +17,7 @@ models:
   - name: CodeLlama
     provider: ollama
     model: codellama:7b
-    apiBase: http://192.168.100.194:11434
+    apiBase: http://192.168.100.154:11434
     roles:
       - chat
       - edit
@@ -25,6 +25,6 @@ models:
   - name: Llama rapido
     provider: ollama
     model: llama3.2:1b
-    apiBase: http://192.168.100.194:11434
+    apiBase: http://192.168.100.154:11434
     roles:
       - autocomplete
