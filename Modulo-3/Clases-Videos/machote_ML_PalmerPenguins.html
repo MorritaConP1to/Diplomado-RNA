@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Machote ML — Palmer Penguins</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #0f0a1a; color: #e8d5f5; min-height: 100vh; padding: 16px; }
+  h1 { text-align: center; font-size: 1.5em; background: linear-gradient(135deg, #c084fc, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
+  .subtitle { text-align: center; color: #a78bfa; font-size: 0.82em; margin-bottom: 18px; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; justify-content: center; }
+  .tab { padding: 7px 15px; border-radius: 20px; border: 1.5px solid #4c1d95; background: transparent; color: #c4b5fd; cursor: pointer; font-size: 0.78em; transition: all 0.2s; }
+  .tab.active, .tab:hover { background: #4c1d95; color: #f5f0ff; border-color: #7c3aed; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .model-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .model-card { background: #1a1030; border: 1px solid #2d1b69; border-radius: 12px; padding: 14px; cursor: pointer; transition: border-color 0.2s, transform 0.15s; }
+  .model-card:hover { border-color: #7c3aed; transform: translateY(-2px); }
+  .model-card.expanded { border-color: #a78bfa; }
+  .model-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 6px; }
+  .model-emoji { font-size: 1.6em; flex-shrink: 0; }
+  .model-name { font-weight: 700; color: #c4b5fd; font-size: 0.95em; }
+  .model-tagline { font-size: 0.75em; color: #9ca3af; margin-top: 2px; }
+  .model-type { font-size: 0.65em; padding: 2px 8px; border-radius: 10px; margin-left: auto; white-space: nowrap; flex-shrink: 0; }
+  .tipo-ns { background: #1e3a5f; color: #7dd3fc; }
+  .tipo-s  { background: #1a3a2a; color: #6ee7b7; }
+  .model-detail { display: none; font-size: 0.77em; line-height: 1.65; margin-top: 10px; }
+  .model-card.expanded .model-detail { display: block; }
+  .model-detail h4 { color: #a78bfa; margin: 10px 0 4px; font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.5px; }
+  .model-detail p, .model-detail li { color: #d1d5db; }
+  .model-detail ul { padding-left: 16px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
+  .tag { font-size: 0.68em; padding: 2px 8px; border-radius: 10px; }
+  .tag.bad  { background: #3b1515; color: #f87171; }
+  .tag.good { background: #1a3a2a; color: #6ee7b7; }
+  .hint { font-size: 0.68em; color: #4c1d95; text-align: right; margin-top: 8px; }
+  .metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+  .metric-card { background: #1a1030; border: 1px solid #2d1b69; border-radius: 10px; padding: 12px; }
+  .metric-name { color: #c4b5fd; font-weight: 700; font-size: 0.88em; margin-bottom: 4px; }
+  .metric-formula { background: #0f0a1a; border-radius: 6px; padding: 5px 10px; font-family: monospace; font-size: 0.75em; color: #a78bfa; margin-bottom: 6px; }
+  .metric-desc { font-size: 0.75em; color: #9ca3af; line-height: 1.5; }
+  .metric-when { font-size: 0.7em; color: #6ee7b7; margin-top: 6px; border-top: 1px solid #1f1542; padding-top: 5px; }
+  .flow-wrap { overflow-x: auto; padding: 8px 0; }
+  .flow { display: flex; align-items: stretch; gap: 0; min-width: max-content; }
+  .flow-step { background: #1a1030; border: 1px solid #2d1b69; border-radius: 10px; padding: 10px 12px; min-width: 105px; text-align: center; flex-shrink: 0; font-size: 0.75em; }
+  .flow-arrow { color: #4c1d95; font-size: 1.5em; display: flex; align-items: center; padding: 0 3px; }
+  .fs-emoji { font-size: 1.3em; display: block; margin-bottom: 4px; }
+  .fs-name { color: #c4b5fd; font-weight: 700; display: block; margin-bottom: 2px; font-size: 0.9em; }
+  .fs-why { color: #6b7280; display: block; font-size: 0.88em; }
+  .trick-list { display: flex; flex-direction: column; gap: 8px; }
+  .trick { background: #1a1030; border: 1px solid #2d1b69; border-radius: 8px; padding: 11px 14px; font-size: 0.78em; line-height: 1.65; }
+  .trick-title { color: #f472b6; font-weight: 700; margin-bottom: 4px; }
+  .trick code { background: #0f0a1a; border-radius: 4px; padding: 1px 5px; font-family: monospace; color: #a78bfa; }
+  .path-list { display: flex; flex-direction: column; gap: 10px; }
+  .path-item { background: #1a1030; border-left: 3px solid #4c1d95; border-radius: 0 10px 10px 0; padding: 12px 14px; }
+  .path-num { font-size: 0.67em; color: #7c3aed; font-weight: 700; margin-bottom: 2px; letter-spacing: 0.8px; }
+  .path-title { color: #c4b5fd; font-weight: 700; font-size: 0.9em; margin-bottom: 4px; }
+  .path-desc { font-size: 0.76em; color: #9ca3af; line-height: 1.55; }
+  .path-q { font-size: 0.72em; color: #a78bfa; margin-top: 6px; font-style: italic; }
+  .badge { display: inline-block; font-size: 0.65em; padding: 1px 8px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
+  .badge-now   { background: #4c1d95; color: #e9d5ff; }
+  .badge-next  { background: #1e3a5f; color: #bae6fd; }
+  .badge-later { background: #1f2937; color: #9ca3af; }
+  .section-title { color: #7c3aed; font-size: 0.7em; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin: 16px 0 8px; }
+  .why-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .why-item { background: #1a1030; border: 1px solid #2d1b69; border-radius: 8px; padding: 11px 14px; font-size: 0.78em; line-height: 1.6; }
+  .why-title { color: #fbbf24; font-weight: 700; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<h1>🐧 Machote ML — Palmer Penguins</h1>
+<p class="subtitle">Toca una tarjeta para expandir · Navega con las pestañas de arriba</p>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('modelos',this)">🤖 Modelos</button>
+  <button class="tab" onclick="showTab('metricas',this)">📈 Métricas</button>
+  <button class="tab" onclick="showTab('flujo',this)">⚙️ Flujo</button>
+  <button class="tab" onclick="showTab('ruta',this)">🗺️ Qué estudiar</button>
+  <button class="tab" onclick="showTab('trucos',this)">✨ Trucos clave</button>
+</div>
+
+<div id="tab-modelos" class="panel active">
+  <div class="model-grid" id="modelGrid"></div>
+</div>
+
+<div id="tab-metricas" class="panel">
+  <div class="metric-grid" id="metricGrid"></div>
+</div>
+
+<div id="tab-flujo" class="panel">
+  <p class="section-title">Flujo completo del notebook</p>
+  <div class="flow-wrap"><div class="flow" id="flujoDiv"></div></div>
+  <p class="section-title" style="margin-top:20px">Por qué ese orden de modelos</p>
+  <div class="why-list" id="whyList"></div>
+</div>
+
+<div id="tab-ruta" class="panel">
+  <div class="path-list" id="pathList"></div>
+</div>
+
+<div id="tab-trucos" class="panel">
+  <p class="section-title">Cosas que parecen obvias pero no lo son</p>
+  <div class="trick-list" id="trickList"></div>
+</div>
+
+<script>
+const modelos = [
+  { emoji:'🔵', name:'K-Means', tipo:'No supervisado', tipoClass:'tipo-ns',
+    tagline:'Agrupa sin usar etiquetas. Punto de partida exploratorio.',
+    como:'Inicializa K centroides → asigna cada punto al más cercano (distancia euclidiana) → recalcula centroides como promedio del cluster → repite hasta convergencia.',
+    cuando:'No tienes etiquetas. Quieres explorar si los datos se agrupan naturalmente antes de etiquetar.',
+    params:['n_clusters=3 (número de grupos)','n_init=10 (cuántas inicializaciones probar)','random_state=42 (reproducibilidad)'],
+    pros:['Simple e intuitivo','No necesita etiquetas','Rápido de entrenar'],
+    cons:['No predice probabilidades','Asume clusters esféricos del mismo tamaño','El mapeo cluster→clase requiere conocer y_test (truco de evaluación)','Sensible a outliers'] },
+  { emoji:'🔴', name:'SVM', tipo:'Supervisado', tipoClass:'tipo-s',
+    tagline:'Hiperplano con margen máximo. Preciso pero caja negra.',
+    como:'Encuentra los puntos más cercanos al límite (vectores de soporte) y maximiza la distancia entre ellos. Con kernel RBF aplica una transformación gaussiana para separar clases que no son linealmente separables.',
+    cuando:'Datos complejos o de alta dimensión. Quieres buena precisión y no necesitas explicar las decisiones.',
+    params:['kernel="rbf" (transformación gaussiana)','C=1.0 (regularización — mayor C = más ajuste al train)','gamma="scale" (radio de influencia, ajuste automático)','probability=True (activa predict_proba)'],
+    pros:['Robusto al overfitting','Efectivo en alta dimensión','Buenas probabilidades con probability=True'],
+    cons:['Caja negra — no explica decisiones','Requiere normalización estricta','Lento con datasets grandes'] },
+  { emoji:'🟢', name:'Árbol de Decisión', tipo:'Supervisado', tipoClass:'tipo-s',
+    tagline:'Reglas if-then visualizables. El más interpretable.',
+    como:'En cada nodo selecciona el feature y umbral que mejor reduce la impureza Gini. Divide los datos en dos subconjuntos y repite recursivamente hasta nodos puros o max_depth.',
+    cuando:'Necesitas explicar cada predicción. Quieres visualizar las reglas de decisión. No puedes normalizar los datos.',
+    params:['max_depth=5 (límite de profundidad para evitar overfitting)','criterion="gini" (criterio de split)','min_samples_leaf=3 (mínimo de muestras por hoja)'],
+    pros:['100% interpretable','No requiere normalización','Visualizable con plot_tree','Muestra importancia de features'],
+    cons:['Overfitting sin restricciones (ver gráfica depth vs accuracy)','Fronteras rectangulares','Inestable a cambios pequeños en datos','Probabilidades aproximadas (proporción de hoja)'] },
+  { emoji:'🟠', name:'Regresión Logística (RLM)', tipo:'Supervisado', tipoClass:'tipo-s',
+    tagline:'Modelo lineal probabilístico. Clasifica pese al nombre.',
+    como:'Calcula zₖ = w·x + b para cada clase. Aplica softmax: P(clase k) = exp(zₖ) / Σ exp(zⱼ). Predice la clase con mayor probabilidad. Se entrena minimizando cross-entropy.',
+    cuando:'Necesitas probabilidades calibradas y reales. Quieres interpretabilidad de los coeficientes. Buen balance precisión/simplicidad.',
+    params:['solver="lbfgs" (optimizador para multinomial)','max_iter=1000 (iteraciones de convergencia)','C=1.0 (regularización L2 — igual que SVM)'],
+    pros:['Probabilidades calibradas y reales','Coeficientes interpretables por clase','Estable y rápido de entrenar','Regularización integrada'],
+    cons:['Solo fronteras lineales (hiperplanos)','No modela interacciones complejas entre features','Nombre confuso: classifica, no regresiona'] },
+  { emoji:'🟣', name:'Red Neuronal (MLP)', tipo:'Supervisado', tipoClass:'tipo-s',
+    tagline:'Capas ocultas para patrones no lineales. Máxima flexibilidad.',
+    como:'Forward pass: datos fluyen capa a capa aplicando output = ReLU(W·x + b). Se calcula la pérdida (cross-entropy). Backpropagation: gradientes hacia atrás. Adam actualiza pesos. Repite por épocas.',
+    cuando:'Datos con relaciones complejas y no lineales. Quieres máxima precisión. Tienes suficientes datos de entrenamiento.',
+    params:['hidden_layer_sizes=(64,32) (2 capas ocultas)','activation="relu" — f(x)=max(0,x)','solver="adam" (optimizador adaptativo)','early_stopping=True (para si validación no mejora)'],
+    pros:['Captura relaciones no lineales','Muy flexible y preciso','Puede manejar patrones complejos'],
+    cons:['Caja negra','Más lento de entrenar','Requiere más datos para generalizar bien','Hiperparámetros difíciles de ajustar'] }
+];
+
+const metricas = [
+  { name:'Accuracy', formula:'correctas / total', desc:'Porcentaje de predicciones correctas. Simple pero puede ser engañosa si las clases están desbalanceadas.', when:'Clases balanceadas' },
+  { name:'Balanced Accuracy', formula:'promedio(recall por clase)', desc:'Accuracy promediada por clase. No favorece a las clases mayoritarias. Más honesta en datasets desbalanceados.', when:'Clases desbalanceadas — siempre útil revisarla' },
+  { name:'Precision', formula:'VP / (VP + FP)', desc:'De todas las veces que predije clase X, ¿cuántas realmente eran X? Importa cuando un falso positivo es costoso.', when:'Cuando no quieres alarmas falsas' },
+  { name:'Recall', formula:'VP / (VP + FN)', desc:'De todos los casos reales de clase X, ¿cuántos detecté? Importa cuando no puedes perderte ningún caso real.', when:'Diagnóstico médico, detección de fraude' },
+  { name:'F1-Score Macro', formula:'2 × (P × R) / (P + R)', desc:'Balance entre precision y recall. "Macro" calcula F1 por cada clase y los promedia por igual, sin importar el tamaño de cada clase.', when:'Balance general entre precision y recall' },
+  { name:'Silhouette Score', formula:'rango: −1 a 1', desc:'Solo para clustering. Qué tan compactos y separados están los clusters. Cercano a 1 = clusters bien definidos.', when:'K-Means y algoritmos no supervisados' },
+  { name:'Inercia (K-Means)', formula:'Σ dist²(punto, centroide)', desc:'Suma de distancias al cuadrado de cada punto a su centroide. Menor es mejor. Cae rápido al principio y se estabiliza.', when:'Elegir número de clusters (método del codo)' },
+  { name:'Matriz de Confusión', formula:'filas=real · columnas=predicho', desc:'Diagonal principal = aciertos. Fuera de diagonal = errores. Muestra exactamente QUÉ clases confunde el modelo entre sí.', when:'Siempre — es la métrica más informativa visualmente' }
+];
+
+const flujoSteps = [
+  {emoji:'📦', name:'Cargar', why:'sns.load_dataset'},
+  {emoji:'🔍', name:'EDA', why:'Explorar patrones'},
+  {emoji:'🧹', name:'Limpiar NaN', why:'dropna()'},
+  {emoji:'🏷️', name:'Encode target', why:'LabelEncoder'},
+  {emoji:'🔢', name:'One-Hot', why:'get_dummies'},
+  {emoji:'✂️', name:'Split', why:'stratify=y, 80/20'},
+  {emoji:'⚖️', name:'Normalizar', why:'fit solo en train'},
+  {emoji:'🤖', name:'Entrenar', why:'5 modelos'},
+  {emoji:'📊', name:'Evaluar', why:'métricas + confusión'},
+  {emoji:'🔮', name:'Inferir', why:'datos nuevos'}
+];
+
+const whyItems = [
+  { title:'K-Means → SVM', text:'K-Means es no supervisado: muestra qué tan separables son los datos naturalmente, pero no puede predecir con certeza ni usa etiquetas. SVM entra para usar esas etiquetas y aprender el hiperplano óptimo.' },
+  { title:'SVM → Árbol', text:'SVM es caja negra. No puede explicar por qué tomó una decisión en términos de las features originales. El Árbol genera reglas if-then que cualquiera puede leer y seguir.' },
+  { title:'Árbol → RLM', text:'El Árbol puede overfit (la gráfica de profundidad lo muestra) y sus probabilidades son solo proporciones de la hoja, no estimaciones reales. RLM genera probabilidades calibradas matemáticamente.' },
+  { title:'RLM → MLP', text:'RLM asume que las fronteras entre clases son hiperplanos lineales. Si los datos tienen relaciones curvas o interacciones complejas, RLM no puede aprenderlas. MLP puede, gracias a sus capas ocultas.' }
+];
+
+const pathItems = [
+  { num:'AHORA — YA TIENES ESTO', badgeClass:'badge-now', badgeText:'HECHO',
+    title:'Correr y entender el flujo completo',
+    desc:'Sabes cargar datos, preprocesar, entrenar 5 modelos y evaluar resultados. Eso ya es bastante sólido para alguien que está "al día".',
+    q:'¿Puedes explicar por qué el scaler se entrena solo con datos de train?' },
+  { num:'PRIORIDAD ALTA — Esta semana', badgeClass:'badge-now', badgeText:'URGENTE',
+    title:'Entender overfitting con la gráfica del Árbol',
+    desc:'La gráfica de accuracy vs profundidad en el notebook es el mejor ejemplo visual. Observa cómo train sigue subiendo pero test se estabiliza o baja. Eso es overfitting en tiempo real.',
+    q:'¿Qué pasa si entrenas un árbol sin max_depth en un dataset pequeño?' },
+  { num:'PRIORIDAD ALTA — Esta semana', badgeClass:'badge-now', badgeText:'URGENTE',
+    title:'Leer métricas con criterio propio',
+    desc:'Saber qué significa cada número en la matriz de confusión. Entender cuándo usar F1 vs Accuracy vs Balanced Accuracy. Practicar con los resultados del notebook mirando qué clases se confunden más.',
+    q:'Si Chinstrap tiene recall bajo, ¿qué significa eso en términos de pingüinos reales?' },
+  { num:'SIGUIENTE — Próximas 2 semanas', badgeClass:'badge-next', badgeText:'SIGUIENTE',
+    title:'Intuición geométrica de cada modelo',
+    desc:'K-Means: centroides como "imanes". SVM: pasillo máximo entre grupos. Árbol: cortes perpendiculares. RLM: línea recta entre clases. MLP: líneas que se doblan. No necesitas las fórmulas todavía, sí la imagen mental.',
+    q:'¿Por qué K-Means falla con datos en forma de arco o media luna?' },
+  { num:'SIGUIENTE — Próximas 2 semanas', badgeClass:'badge-next', badgeText:'SIGUIENTE',
+    title:'Qué hace softmax y por qué importa',
+    desc:'Softmax convierte cualquier vector de números en probabilidades que suman 1. Esto conecta RLM y MLP con la idea de "confianza". Saber leerlo: si softmax da [0.85, 0.12, 0.03], el modelo predice clase 0 con 85% de confianza.',
+    q:'¿Qué diferencia hay entre la salida de un Árbol y la de RLM cuando ambos dicen "Gentoo"?' },
+  { num:'SIN PRISA — Cuando tengas tiempo', badgeClass:'badge-later', badgeText:'LUEGO',
+    title:'Backpropagation conceptualmente (no matemáticamente)',
+    desc:'No necesitas derivar ecuaciones. Necesitas entender: "el error de la última capa se propaga hacia atrás ajustando los pesos de cada neurona según cuánto contribuyó al error". 3Blue1Brown en YouTube es el mejor recurso visual para esto.',
+    q:'¿Por qué necesitamos calcular derivadas parciales para ajustar los pesos de una red?' },
+  { num:'SIN PRISA — Cuando tengas tiempo', badgeClass:'badge-later', badgeText:'LUEGO',
+    title:'Gradient Descent y Adam intuitivamente',
+    desc:'"Bajar la colina del error poco a poco" es gradient descent. Adam es una versión que ajusta el tamaño del paso automáticamente por parámetro. No necesitas la fórmula completa, sí la intuición de que el learning rate importa.',
+    q:'¿Qué pasa visualmente si el learning rate es demasiado grande? ¿Y si es demasiado pequeño?' },
+  { num:'RECURSO RECOMENDADO', badgeClass:'badge-later', badgeText:'RECURSO',
+    title:'3Blue1Brown — Neural Networks (YouTube, gratis)',
+    desc:'Serie de 4 videos. La explicación visual más clara de cómo funciona una red neuronal que existe en internet. Sin fórmulas pesadas, todo geométrico. Ver después de terminar el diplomado para consolidar la intuición.',
+    q:'Buscar: "3Blue1Brown neural network" en YouTube' }
+];
+
+const tricks = [
+  { title:'La Regresión Logística clasifica, no regresiona',
+    text:'El nombre viene de la función sigmoide/softmax que usa internamente, no de que prediga números continuos. El flujo real: combinación lineal → softmax → probabilidades → clase con mayor probabilidad. Resultado = clasificación.' },
+  { title:'Normalizar ANTES del split = data leakage',
+    text:'Si ajustas el <code>StandardScaler</code> con todos los datos, el modelo "ve" información del test set. Regla: <code>scaler.fit_transform(X_train)</code> y luego solo <code>scaler.transform(X_test)</code>.' },
+  { title:'NaN ≠ cero en datos físicos',
+    text:'Reemplazar con 0 significaría "este pingüino pesa 0g y tiene pico de 0mm". El modelo aprende ese cero como dato real y genera predicciones erróneas. Opciones válidas: <code>dropna()</code> si son pocos (menos del 5%), o imputar con mediana por grupo.' },
+  { title:'K-Means no puede clasificar en producción real',
+    text:'El mapeo cluster→especie que hacemos en el notebook requiere conocer <code>y_test</code>. En un caso real sin etiquetas ese paso no es posible. Por eso K-Means es exploración inicial, no clasificador final.' },
+  { title:'Accuracy alta puede ser engañosa',
+    text:'Si el 95% de los datos son clase A, un modelo que siempre predice A tiene 95% accuracy pero es completamente inútil. Balanced Accuracy y F1-Macro muestran el desempeño real por clase.' },
+  { title:'Overfitting en una sola frase',
+    text:'Train accuracy alta + Test accuracy baja = el modelo memorizó el dataset, no aprendió patrones. Señal visual: en la gráfica depth vs accuracy del Árbol, las dos líneas se separan después de cierta profundidad.' },
+  { title:'El parámetro C en SVM y RLM',
+    text:'C = inverso de regularización. C pequeño = modelo más simple, más penalización. C grande = más ajustado al train, más riesgo de overfit. <code>C=1.0</code> es el estándar cuando no tienes información previa.' },
+  { title:'multi_class fue eliminado en sklearn ≥ 1.2',
+    text:'<code>LogisticRegression(multi_class="multinomial")</code> ya no funciona. El solver <code>lbfgs</code> maneja automáticamente múltiples clases. Solo quita el parámetro y funciona.' },
+  { title:'early_stopping en MLP no es magia negra',
+    text:'Reserva un 10% de train como validación interna. Si la accuracy de validación no mejora en <code>n_iter_no_change=20</code> épocas seguidas, detiene el entrenamiento. Evita que la red memorice el dataset de entrenamiento.' }
+];
+
+// ── Render modelos
+const mg = document.getElementById('modelGrid');
+modelos.forEach(m => {
+  const c = document.createElement('div');
+  c.className = 'model-card';
+  c.innerHTML = `
+    <div class="model-header">
+      <span class="model-emoji">${m.emoji}</span>
+      <div style="flex:1">
+        <div class="model-name">${m.name}</div>
+        <div class="model-tagline">${m.tagline}</div>
+      </div>
+      <span class="model-type ${m.tipoClass}">${m.tipo}</span>
+    </div>
+    <div class="model-detail">
+      <h4>¿Cómo funciona?</h4><p>${m.como}</p>
+      <h4>¿Cuándo usarlo?</h4><p>${m.cuando}</p>
+      <h4>Parámetros clave</h4>
+      <ul>${m.params.map(p=>`<li>${p}</li>`).join('')}</ul>
+      <div class="tag-row">
+        ${m.pros.map(p=>`<span class="tag good">✓ ${p}</span>`).join('')}
+        ${m.cons.map(c=>`<span class="tag bad">✗ ${c}</span>`).join('')}
+      </div>
+    </div>
+    <div class="hint">toca para expandir</div>`;
+  c.addEventListener('click', () => {
+    c.classList.toggle('expanded');
+    c.querySelector('.hint').textContent = c.classList.contains('expanded') ? 'toca para cerrar' : 'toca para expandir';
+  });
+  mg.appendChild(c);
+});
+
+// ── Render métricas
+const metg = document.getElementById('metricGrid');
+metricas.forEach(m => {
+  const d = document.createElement('div');
+  d.className = 'metric-card';
+  d.innerHTML = `<div class="metric-name">${m.name}</div><div class="metric-formula">${m.formula}</div><div class="metric-desc">${m.desc}</div><div class="metric-when">Cuándo: ${m.when}</div>`;
+  metg.appendChild(d);
+});
+
+// ── Render flujo
+const fd = document.getElementById('flujoDiv');
+flujoSteps.forEach((s,i) => {
+  const step = document.createElement('div');
+  step.className = 'flow-step';
+  step.innerHTML = `<span class="fs-emoji">${s.emoji}</span><span class="fs-name">${s.name}</span><span class="fs-why">${s.why}</span>`;
+  fd.appendChild(step);
+  if (i < flujoSteps.length-1) {
+    const a = document.createElement('div');
+    a.className = 'flow-arrow'; a.textContent = '›';
+    fd.appendChild(a);
+  }
+});
+
+// ── Render why
+const wl = document.getElementById('whyList');
+whyItems.forEach(w => {
+  const d = document.createElement('div');
+  d.className = 'why-item';
+  d.innerHTML = `<div class="why-title">${w.title}</div><div style="color:#d1d5db;font-size:0.78em;line-height:1.6">${w.text}</div>`;
+  wl.appendChild(d);
+});
+
+// ── Render ruta
+const pl = document.getElementById('pathList');
+pathItems.forEach(p => {
+  const d = document.createElement('div');
+  d.className = 'path-item';
+  d.innerHTML = `
+    <div class="path-num">${p.num} <span class="badge ${p.badgeClass}">${p.badgeText}</span></div>
+    <div class="path-title">${p.title}</div>
+    <div class="path-desc">${p.desc}</div>
+    <div class="path-q">💬 ${p.q}</div>`;
+  pl.appendChild(d);
+});
+
+// ── Render trucos
+const tl = document.getElementById('trickList');
+tricks.forEach(t => {
+  const d = document.createElement('div');
+  d.className = 'trick';
+  d.innerHTML = `<div class="trick-title">${t.title}</div>${t.text}`;
+  tl.appendChild(d);
+});
+
+function showTab(name, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
