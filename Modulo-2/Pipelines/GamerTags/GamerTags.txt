@@ -1,0 +1,27 @@
+gamer tags (Encabezado LLamativo)
+crea tu identidad gamer (Agregas emoticonos /emogis)
+
+introduce tu nombre
+apellido
+numero favorito
+
+Devuelve las estadisticas
+nombre completo
+longitud del nombre
+la primera letra
+ultima letra
+
+Tus opciones de gamertag (Tipo tabla)
+
+(Lista)
+Tags basico (Primeras 4 letras del nombre)
+tags invertido (nombre invertido oh alreves )
+intercalado (Con Apellido)
+elite
+con numeros
+(termina Lista)
+Elije tu favorito y conquista el mundo gamer (emollis)
+
+
+Funciones par encabezados / listas/y demas para todo
+

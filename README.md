@@ -1,200 +1,272 @@
-# Diplomado-RNA
+<div align="center">
 
-## Diplomado Superior en Redes Neuronales Artificiales y Deep Learning — UAEM
+# 🕸️ Diplomado Superior en RNA y Deep Learning
 
-Este repositorio contiene todos los ejercicios, notas, proyectos y recursos generados durante el diplomado, organizado por módulo.
+**Universidad Autónoma del Estado de México — UAEM**
+
+[![Python](https://img.shields.io/badge/Python-3.10+-4A148C?style=for-the-badge&logo=python&logoColor=CE93D8)](https://python.org)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-7B1FA2?style=for-the-badge&logo=tensorflow&logoColor=CE93D8)](https://tensorflow.org)
+[![Keras](https://img.shields.io/badge/Keras-4A148C?style=for-the-badge&logo=keras&logoColor=CE93D8)](https://keras.io)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-7B1FA2?style=for-the-badge&logo=scikit-learn&logoColor=CE93D8)](https://scikit-learn.org)
+[![NumPy](https://img.shields.io/badge/NumPy-4A148C?style=for-the-badge&logo=numpy&logoColor=CE93D8)](https://numpy.org)
+[![Pandas](https://img.shields.io/badge/Pandas-7B1FA2?style=for-the-badge&logo=pandas&logoColor=CE93D8)](https://pandas.pydata.org)
+[![Jupyter](https://img.shields.io/badge/Jupyter-4A148C?style=for-the-badge&logo=jupyter&logoColor=CE93D8)](https://jupyter.org)
+[![Arduino](https://img.shields.io/badge/Arduino-7B1FA2?style=for-the-badge&logo=arduino&logoColor=CE93D8)](https://arduino.cc)
+
+<br>
+
+> *De la neurona de McCulloch-Pitts al TinyML en microcontroladores.*  
+> 5 módulos · 30+ notebooks · Python · Deep Learning · Sistemas Embebidos
+
+<br>
+
+[📖 Instalación](#⚙️-instalación) •
+[📂 Estructura](#📂-estructura) •
+[🧩 Módulos](#🧩-módulos) •
+[🚀 Proyectos](#🚀-proyectos-destacados) •
+[📚 Librería](#📚-librería-compartida) •
+[🎀 Tips](#🎀-tips-para-empezar)
+
+<br>
 
 ---
+</div>
 
-## 🗂️ Estructura del repositorio
+<br>
+
+## 🦇 Panorama General
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                                                                     │
+│   🧠 INTELIGENCIA ARTIFICIAL                                       │
+│   ├── 🤖 Machine Learning                                          │
+│   │    ├── M2 · Python para IA  (preprocesamiento, EDA, MP Neuron) │
+│   │    ├── M3 · ML clásico      (Perceptrón, RL, SVM, Árboles)     │
+│   │    └── M4 · Deep Learning   (MLP, CNN, RNN/LSTM)               │
+│   ├── 🔧 M5 · Sistemas Embebidos (Arduino, TinyML)                 │
+│   └── 📐 M1 · Fundamentos       (historia, tipos aprendizaje)       │
+│                                                                     │
+│   🎯 Progresión: M1 → M2 → M3 → M4 → M5                           │
+│   Cada módulo construye sobre el anterior.                          │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+<br>
+
+## ⚙️ Instalación
+
+<details open>
+<summary><b>Requisitos previos</b></summary>
+
+- [Anaconda](https://anaconda.com/download) o Miniconda
+- Git
+- VSCode + extensión Jupyter
+
+</details>
+
+```bash
+# 1. Clonar
+git clone https://github.com/MorritaConP1to/Diplomado-RNA.git
+cd Diplomado-RNA
+
+# 2. Crear entorno
+conda env create -f Enviroment/environment.yml
+
+# 3. Activar
+conda activate diplomado-redes
+
+# 4. Registrar kernel
+python -m ipykernel install --user --name diplomado-redes --display-name "Python (diplomado-redes)"
+```
+
+> 💡 **Python 3.10+** · Si hay conflictos con seaborn/matplotlib:  
+> `pip install "seaborn>=0.13.0" "matplotlib>=3.7,<3.9"`
+
+<br>
+
+## 📂 Estructura
 
 ```
 Diplomado-RNA/
 │
-├── Enviroment/                     # Configuración del entorno conda
-│   ├── environment.yml             # Entorno completo para todos los módulos
-│   ├── diplomado_rna_python.yaml   # Variante del entorno
-│   └── HowTo.txt                   # Instrucciones de instalación paso a paso
+├── 🏗️  Machote/              → Librería compartida (machote_ML.py)
 │
-├── Machote/                        # Recursos reutilizables (importables desde cualquier notebook)
-│   ├── machote_ML.py               # Librería de funciones de ML (cargar, explorar, evaluar)
-│   ├── machote_ML.ipynb            # Versión documentada del machote para estudiar
-│   ├── glosario_python_ML.ipynb    # Referencia de métodos y funciones de Python/pandas/numpy
-│   └── plantilla_ejercicio.ipynb   # Plantilla base para cualquier ejercicio nuevo
+├── 📐 Modulo-1/              → Introducción a la IA
+│   ├── libreria_modulo1.py
+│   ├── cuadernillo_modulo1.ipynb
+│   ├── machote_modulo1.ipynb
+│   └── Estudio/              → 5 temas (historia, matemáticas...)
 │
-├── Modulo-1/                       # Fundamentos de Inteligencia Artificial
-│   └── CalendarioDSRNDL2026.jpeg
+├── 🐍 Modulo-2/              → Python para IA
+│   ├── libreria_modulo2.py
+│   ├── cuadernillo_modulo2.ipynb
+│   ├── Estudio/              → 5 temas (variables → MP Neuron)
+│   └── Pipelines/            → GamerTags, Body Metrics
 │
-├── Modulo-2/                       # Python para Inteligencia Artificial
-│   ├── Ejercicios/                 # Ejercicios por tema
-│   │   ├── Tema1/                  # Fundamentos: funciones, variables, strings
-│   │   ├── Tema2/                  # Operadores aritméticos, lógicos, comparación
-│   │   └── Tema5/                  # Neurona MP y Perceptrón
-│   ├── Lecturas/                   # Documentos de referencia (f-strings, etc.)
-│   ├── Notebooks/                  # Notebooks de clase por tema
-│   │   ├── DataSets/               # Datasets locales (cancer, fútbol europeo)
-│   │   ├── Machote_ML/             # Copia del machote para Módulo 2
-│   │   ├── Presentaciones/         # Diapositivas del curso
-│   │   ├── Tema1/                  # Comentarios, funciones, strings, variables
-│   │   ├── Tema2/                  # Operadores booleanos, aritmético, identidad
-│   │   ├── Tema3/                  # Listas, tuplas, diccionarios, sets
-│   │   ├── Tema4/                  # NumPy, Pandas, Matplotlib, Regresión Lineal
-│   │   └── Tema5/                  # Neurona McCulloch-Pitts, Perceptrón
-│   └── Programas/                  # Scripts Python por tema
-│       ├── Tema_0/                 # Hello World y pruebas iniciales
-│       ├── Tema_1/                 # Prácticas de funciones, strings, variables
-│       ├── Tema_2/                 # Prácticas de operadores
-│       └── Proyectos/              # Proyectos evaluados
-│           ├── Tema1/              # GamerTags — generador de tags para jugadores
-│           └── Tema2/              # Calculadora de métricas corporales (IMC, calorías)
+├── 🤖 Modulo-3/              → Machine Learning
+│   ├── libreria_modulo3.py
+│   ├── cuadernillo_modulo3.ipynb
+│   ├── Estudio/              → 7 temas (Perceptrón → Redes)
+│   └── Pipelines/            → 5 pipelines (RL, SVM, K-Means...)
 │
-└── Modulo-3/                       # Machine Learning (en progreso)
-    ├── Clases/                     # Notebooks de clase
-    ├── Ejercicios/                 # Ejercicios y plantillas
-    ├── Machote/                    # Pipelines y machotes del módulo
-    │   ├── Funciones_Activacion.ipynb
-    │   ├── Machote_Modulo3.ipynb
-    │   ├── Perceptron_machote.ipynb
-    │   ├── Pipeline_RegresionLineal.ipynb
-    │   ├── Pipeline_RegresionLogistica.ipynb
-    │   ├── Pipeline_ArbolDecision.ipynb
-    │   ├── Pipeline_SVM.ipynb
-    │   └── Pipeline_KMeans.ipynb
-    └── Tareas/                     # Tareas entregadas
+├── 🧠 Modulo-4/              → Deep Learning
+│   ├── modulo4_libreria.py
+│   ├── cuadernillo_modulo4.ipynb
+│   ├── Estudio/              → 5 temas (Fundamentos → Plataformas)
+│   └── Pipelines/            → 5 pipelines (CNN, LSTM, Despliegue...)
+│
+├── 🔧 Modulo-5/              → Sistemas Embebidos
+│   ├── libreria_modulo5.py
+│   ├── cuadernillo_modulo5.ipynb
+│   ├── Estudio/              → 3 temas (Arduino, IA simbólica...)
+│   └── Pipelines/            → 3 pipelines (Serial, Compuertas, TinyML)
+│
+└── 🌐 Enviroment/            → conda environment.yml
 ```
 
----
+<br>
 
-## ⚙️ Instalación del entorno
+## 🧩 Módulos
 
-### Requisitos previos
-- [Anaconda](https://www.anaconda.com/download) o Miniconda instalado
-- Git instalado
-- VSCode con la extensión de Jupyter
+| # | Módulo | Librería | Topics | Pipelines |
+|:-:|--------|----------|--------|-----------|
+| 📐 | **M1 — Introducción a la IA** | [`libreria_modulo1.py`](Modulo-1/libreria_modulo1.py) | Historia, tipos de aprendizaje, vectores, matrices, derivadas | — |
+| 🐍 | **M2 — Python para IA** | [`libreria_modulo2.py`](Modulo-2/libreria_modulo2.py) | Sintaxis, NumPy, Pandas, Matplotlib, MP Neuron, Boolean Trick | [GamerTags](Modulo-2/Pipelines/GamerTags/), [Body Metrics](Modulo-2/Pipelines/BodyMetrics/) |
+| 🤖 | **M3 — Machine Learning** | [`libreria_modulo3.py`](Modulo-3/libreria_modulo3.py) | Perceptrón, Regresión Lineal/Logística, SVM, Árboles, K-Means | [5 pipelines](Modulo-3/Pipelines/) (RL → SVM) |
+| 🧠 | **M4 — Deep Learning** | [`modulo4_libreria.py`](Modulo-4/modulo4_libreria.py) | MLP, CNN, RNN/LSTM, Keras/TF, Backpropagation, Hiperparámetros | [5 pipelines](Modulo-4/Pipelines/) (CNN, LSTM, Despliegue...) |
+| 🔧 | **M5 — TinyML** | [`libreria_modulo5.py`](Modulo-5/libreria_modulo5.py) | Arduino, compuertas lógicas, Perceptrón, TinyML export | [3 pipelines](Modulo-5/Pipelines/) (Serial, Compuertas, TinyML) |
 
-### Pasos (ver también `Enviroment/HowTo.txt`)
+<details>
+<summary><b>📊 Estadísticas del proyecto</b></summary>
 
-```bash
-# 1. Clonar el repositorio
-git clone https://github.com/MorritaConP1to/Diplomado-RNA.git
-cd Diplomado-RNA
+| Métrica | Valor |
+|---------|-------|
+| Total módulos | 5 |
+| Notebooks de estudio | 25+ |
+| Pipelines reutilizables | 16 |
+| Funciones en librerías | 150+ |
+| Lenguaje | Python 3.10+ |
+| Frameworks | TensorFlow, Keras, scikit-learn |
+| Plataformas soportadas | Google Colab + Local (VSCode) |
 
-# 2. Crear el entorno conda desde el archivo
-conda env create -f Enviroment/environment.yml
+</details>
 
-# 3. Activar el entorno
-conda activate diplomado-redes
+<br>
 
-# 4. Registrar como kernel en VSCode
-python -m ipykernel install --user --name diplomado-redes --display-name "Python (diplomado-redes)"
-```
+## 🚀 Proyectos Destacados
 
-### Si hay errores de compatibilidad con seaborn/matplotlib
+<details>
+<summary><b>🎮 GamerTag Generator</b> — <code>Modulo-2/Pipelines/GamerTags/</code></summary>
 
-```bash
-conda activate diplomado-redes
-pip install --upgrade seaborn
-# Si persiste:
-pip install "seaborn>=0.13.0" "matplotlib>=3.7,<3.9"
-```
-
-Después reiniciar el kernel en VSCode con el botón **Restart**.
-
-### Versión de Python
-- Escuela: Python 3.11.14
-- Compatible con versiones recientes (3.10+)
-
----
-
-## 📓 ¿Cómo usar el machote?
-
-El `machote_ML.py` es una librería de funciones reutilizables que evita copiar código repetido entre notebooks.
-
-**Importar desde cualquier notebook:**
-
-```python
-import sys, os
-
-# Ruta relativa — funciona en Windows y Linux sin cambiar nada
-RUTA = os.path.abspath(os.path.join(os.getcwd(), '..', '..', 'Machote'))
-if RUTA not in sys.path:
-    sys.path.append(RUTA)
-
-from machote_ML import *
-```
-
-**Funciones disponibles:**
-- `cargar_desde_sklearn()`, `cargar_desde_uci()`, `cargar_desde_csv()` — cargar datos
-- `resumen_rapido()`, `ver_correlacion_con_y()`, `ver_mapa_calor()` — exploración
-- `seleccionar_features()`, `dividir_datos()`, `escalar_datos()` — preparación
-- `evaluar_clasificacion()`, `evaluar_regresion()`, `comparar_modelos()` — evaluación
-
----
-
-## 🗂️ Proyectos del Módulo 2
-
-### Proyecto 1 — GamerTag Generator (`Modulo-2/Programas/Proyectos/Tema1/`)
-
-Genera diferentes estilos de GamerTags a partir del nombre, apellido y número favorito del jugador.
+Genera estilos de GamerTags a partir de nombre, apellido y número favorito.
 
 ```bash
 python GamerTags-V2.py
 ```
 
-**Tipos de tags generados:**
-- Básico (primeras 4 letras)
-- Invertido (nombre al revés)
-- Intercalado (combinación nombre + apellido)
-- Élite (primeras 2 + últimas 2 letras)
-- Con número (primeras 5 letras + número favorito)
+**Estilos:** Básico · Invertido · Intercalado · Élite · Con número  
+**Deps:** `pip install pyfiglet tabulate colorama`
 
-**Dependencias:**
-```bash
-pip install pyfiglet tabulate colorama
-```
+> 🎀 *GIF próximamente...*
+</details>
 
-### Proyecto 2 — Calculadora de Métricas Corporales (`Modulo-2/Programas/Proyectos/Tema2/`)
+<details>
+<summary><b>📏 Body Metrics Calculator</b> — <code>Modulo-2/Pipelines/BodyMetrics/</code></summary>
 
-Calcula indicadores de salud y fitness personales.
+Calcula IMC, calorías diarias, hidratación y ritmo cardíaco máximo.
 
 ```bash
 python Calculadora-V2.py
 ```
 
-**Métricas calculadas:**
-- IMC (Índice de Masa Corporal) con clasificación
-- Calorías diarias recomendadas (Fórmula de Harris-Benedict)
-- Litros de agua recomendados al día
-- Ritmo cardíaco máximo
+**Métricas:** IMC · Harris-Benedict · Agua recomendada · Ritmo cardíaco
 
----
+> 🎀 *GIF próximamente...*
+</details>
 
-## 📊 Contenido por módulo
+<details>
+<summary><b>🐧 Palmer Penguins</b> — <code>Modulo-3/Proyecto/</code></summary>
 
-| Módulo | Estado | Temas principales |
-|--------|--------|------------------|
-| Módulo 1 — Fundamentos IA | ✅ Completado | Definiciones, tipos de IA, ética |
-| Módulo 2 — Python para IA | ✅ Completado | Python, NumPy, Pandas, Matplotlib, Neurona MP, Perceptrón |
-| Módulo 3 — Machine Learning | 🔄 En progreso | Regresión, Clasificación, Clustering, Refuerzo |
-| Módulo 4 — Deep Learning | ⏳ Pendiente | CNN, RNN, Transformers, Keras/TensorFlow |
-| Módulo 5 — Sistemas Embebidos | ⏳ Pendiente | Arduino, IA simbólica y conexionista |
+Clasificación de especies de pingüinos usando múltiples modelos ML.
+</details>
 
----
+<details>
+<summary><b>🔌 TinyML + Arduino</b> — <code>Modulo-5/Pipelines/</code></summary>
 
-## 📌 Notas importantes
+Exporta modelos entrenados a C++ para microcontroladores Arduino.  
+Incluye clase `ArduinoSimulado` para practicar sin hardware físico.
+</details>
 
-- Los datasets de UCI se descargan en tiempo de ejecución — se requiere conexión a internet
-- Los datasets locales están en `Modulo-2/Notebooks/DataSets/`
-- El archivo `mapa_diplomado.ipynb` en `Machote/` contiene una guía completa de todo el diplomado
-- Los notebooks con `_blank` en el nombre son plantillas de clase sin resolver
-- Los notebooks con `_V4`, `_v2`, `mejorado` son versiones corregidas y comentadas
+<br>
 
----
+## 📚 Librería Compartida
 
-## 🔗 Recursos útiles
+El archivo [`Machote/machote_ML.py`](Machote/machote_ML.py) contiene funciones reutilizables
+que evitan copiar código entre notebooks:
+
+```python
+import sys, os
+RUTA = os.path.abspath(os.path.join(os.getcwd(), '..', '..', 'Machote'))
+if RUTA not in sys.path:
+    sys.path.append(RUTA)
+from machote_ML import *
+```
+
+**10-step ML pipeline incluido:**
+```
+Cargar → EDA → Features → Dividir → Escalar → Modelo → Entrenar → Predecir → Evaluar → Comparar
+```
+
+Cada módulo además tiene su propia `libreria_moduloN.py` con funciones específicas
+de ese módulo, todas con el mismo patrón de import:
+
+```python
+import sys, os
+sys.path.insert(0, os.path.abspath('.'))
+from libreria_moduloN import *
+```
+
+<br>
+
+## 🎀 Tips para empezar
+
+🕸️ **Si vienes de cero:** empieza por `Modulo-2/Estudio/01_Fundamentos_Python/` y avanza en orden numérico.
+
+🕸️ **Si ya sabes Python:** salta directo a `Modulo-3/machote_modulo3.ipynb` o al módulo que te interese.
+
+🕸️ **Cada módulo es autocontenido:** solo necesitas el entorno conda y la librería del módulo.
+
+🕸️ **Notebooks `_blank`:** son plantillas de ejercicios sin resolver — perfectas para practicar.
+
+🕸️ **Notebooks `_V4`, `mejorado`:** versiones corregidas y comentadas.
+
+🕸️ **Google Colab vs Local:** todas las librerías detectan automáticamente la plataforma.
+
+<details open>
+<summary><b>🔗 Recursos útiles</b></summary>
 
 - [UCI Machine Learning Repository](https://archive.ics.uci.edu/)
 - [Scikit-learn Docs](https://scikit-learn.org/stable/documentation.html)
 - [Pandas Docs](https://pandas.pydata.org/docs/)
 - [Keras/TensorFlow Docs](https://keras.io/)
-- [Generador de títulos ASCII](https://patorjk.com/software/taag/)
+- [Generador ASCII art](https://patorjk.com/software/taag/)
+- [ScreenToGif — grabar GIFs de proyectos](https://www.screentogif.com/)
+
+</details>
+
+<br>
+
+---
+
+<div align="center">
+
+<br>
+
+**Diplomado Superior en Redes Neuronales Artificiales y Deep Learning**  
+UAEM — Facultad de Ingeniería
+
+<sub>🕷️ *Hecho con dedicación, debugging y demasiado café* 🎀</sub>
+
+</div>
