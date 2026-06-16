@@ -18,8 +18,9 @@
 name: diplomado-redes
 
 channels:
-  - conda-forge
   - pytorch
+  - nvidia
+  - conda-forge
   - defaults
 
 dependencies:
@@ -65,7 +66,7 @@ dependencies:
   - pytorch              # Framework PyTorch
   - torchvision          # Datasets y modelos para visión por computadora
   - torchaudio           # Procesamiento de audio con PyTorch
-  - cpuonly              # Sin CUDA (ajustar si tienes GPU compatible)
+  - pytorch-cuda=12.1     # CUDA 12.1 para GPU NVIDIA (ajustar según tu versión de CUDA)
 
   # ------------------------------------------------------------
   # Módulo IV — Procesamiento de Lenguaje Natural (NLP)
