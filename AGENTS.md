@@ -15,7 +15,9 @@ Diplomado-RNA/
 ├── Modulo-2/          # Python para IA (sintaxis, NumPy, Pandas, MP Neuron)
 ├── Modulo-3/          # Machine Learning (Perceptrón, RL, Árboles, SVM, K-Means)
 ├── Modulo-4/          # Deep Learning (MLP, CNN, RNN/LSTM, Keras/TF)
+│   └── Proyectos/     # Proyectos: Reconocimiento_Digitos, Kuromi_vs_Cinnamoroll
 ├── Modulo-5/          # Sistemas Embebidos (Arduino, TinyML, compuertas)
+├── AUTORIA.md         # Creditos y specs del equipo de desarrollo
 ├── Enviroment/        # Entorno conda (environment.yml)
 └── README.md
 ```
@@ -29,6 +31,7 @@ Cada módulo sigue el mismo patrón:
 - `Pipelines/` → pipelines reutilizables
 - `Machotes/` → templates adicionales
 - `Material/` → datasets, imágenes, presentaciones
+- `Proyectos/` → (Módulo-4) proyectos integradores
 
 ## Convenciones de código
 

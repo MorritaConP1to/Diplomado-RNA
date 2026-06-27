@@ -115,7 +115,8 @@ Diplomado-RNA/
 │   ├── modulo4_libreria.py
 │   ├── cuadernillo_modulo4.ipynb
 │   ├── Estudio/              → 5 temas (Fundamentos → Plataformas)
-│   └── Pipelines/            → 5 pipelines (CNN, LSTM, Despliegue...)
+│   ├── Pipelines/            → 5 pipelines (CNN, LSTM, Despliegue...)
+│   └── Proyectos/            → 2 proyectos (Digitos + Kuromi/Cinnamoroll)
 │
 ├── 🔧 Modulo-5/              → Sistemas Embebidos
 │   ├── libreria_modulo5.py
@@ -146,9 +147,10 @@ Diplomado-RNA/
 | Total módulos | 5 |
 | Notebooks de estudio | 25+ |
 | Pipelines reutilizables | 16 |
+| Proyectos en Modulo-4 | 2 (Reconocimiento_Digitos + Kuromi_vs_Cinnamoroll) |
 | Funciones en librerías | 150+ |
 | Lenguaje | Python 3.10+ |
-| Frameworks | TensorFlow, Keras, scikit-learn |
+| Frameworks | TensorFlow, Keras, PyTorch, scikit-learn |
 | Plataformas soportadas | Google Colab + Local (VSCode) |
 
 </details>
@@ -197,6 +199,41 @@ Clasificación de especies de pingüinos usando múltiples modelos ML.
 
 Exporta modelos entrenados a C++ para microcontroladores Arduino.  
 Incluye clase `ArduinoSimulado` para practicar sin hardware físico.
+</details>
+
+<details>
+<summary><b>🔢 Reconocimiento de Digitos</b> — <code>Modulo-4/Proyectos/Reconocimiento_Digitos/</code></summary>
+
+CNN optimizada para clasificar digitos MNIST (0-9) con PyTorch.
+
+- **Arquitectura:** 3 capas Conv + BatchNorm + Dropout + Early Stopping
+- **Dataset:** MNIST (60k train / 10k test)
+- **Portabilidad:** Google Colab + VSCode con deteccion automatica
+- **Inferencia:** Subir foto o dibujar con el mouse
+
+```bash
+# Entrenar (RTX 4060 ~1 min)
+jupyter notebook numero_completo.ipynb
+```
+</details>
+
+<details>
+<summary><b>🖤 Kuromi vs Cinnamoroll</b> — <code>Modulo-4/Proyectos/Kuromi_vs_Cinnamoroll/</code></summary>
+
+Clasificador binario de figuras Sanrio usando Transfer Learning con ResNet18.
+
+- **Arquitectura:** ResNet18 pre-entrenada + Fine-tuning
+- **Dataset:** Fotos de figuras + scraping web (~150 imagenes/clase)
+- **Metricas:** Accuracy, Matriz de confusion, Curva ROC, F1-Score
+- **Salida:** Modelo .pth + mapeo de clases .json
+
+```bash
+# Scraping de imagenes
+python scraping/scraping_imagenes.py
+
+# Entrenar
+jupyter notebook biclase.ipynb
+```
 </details>
 
 <br>
@@ -267,6 +304,9 @@ from libreria_moduloN import *
 **Diplomado Superior en Redes Neuronales Artificiales y Deep Learning**  
 UAEM — Facultad de Ingeniería
 
-<sub>🕷️ *Hecho con dedicación, debugging y demasiado café* 🎀</sub>
+<sub>🕷️ *Hecho con dedicación, debugging y demasiado café* 🎀</sub>  
+<br>
+Hecho por <a href="https://github.com/MorritaConP1to">Diana Blanco · MorritaConP1to</a> —  
+Ver <a href="AUTORIA.md">AUTORIA.md</a> para specs del equipo y creditos.
 
 </div>

@@ -19,3 +19,17 @@ Thumbs.db
 # IDE
 .idea/misc.xml
 .idea/workspace.xml
+
+# Datasets (imagenes grandes, no versionar)
+dataset/
+datos/
+
+# Modelos entrenados (binarios, pesados)
+modelos/
+*.pth
+*.pt
+*.pkl
+
+# Logs de entrenamiento
+*.csv
+logs/
