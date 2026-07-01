@@ -135,6 +135,7 @@ cells.append(code_cell("""# ============================================
 # ============================================
 
 import os, sys, io, warnings, copy, time, json
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
@@ -1483,6 +1484,10 @@ cells.append(code_cell("""# ============================================
 #     desbalance en los errores del modelo.
 # ============================================
 
+plt.close('all')
+gc.collect()
+torch.cuda.empty_cache()
+
 def evaluar_biclase(modelo, test_loader, device, clases):
     modelo.eval()
     todas_reales = []
@@ -1758,24 +1763,11 @@ cells.append(code_cell("""# ============================================
 #
 # ?Que hace: De las 128 muestras guardadas, selecciona
 #   SOLO las que el modelo clasifico MAL y las muestra.
-#
-# ?Por que? Los errores son mas utiles que los aciertos
-#   porque revelan las debilidades del modelo.
-#
-# ?Variables:
-#   - errores: lista de tuplas filtrada (solo real != pred)
-#   - n_mostrar: cuantos errores mostrar (max 12)
-#   - Si len(errores) == 0: !no hubo errores en la muestra!
-#     (significa que el modelo es muy bueno o que la
-#     muestra tenia suerte: ejecuta de nuevo para confirmar)
-#
-# ?Para experimentar:
-#   - Si ves errores recurrentes (ej: siempre con fondo
-#     rojo), toma fotos de esa figura con otro fondo.
-#   - Si el error es siempre la misma figura (mod7, mod8),
-#     significa que esa figura es muy diferente a las de
-#     train. Agregala a train en vez de test.
 # ============================================
+
+plt.close('all')
+gc.collect()
+torch.cuda.empty_cache()
 
 errores = [(img, real, pred, prob) for (img, real, pred, prob) in imagenes_guardadas
            if real != pred]
@@ -1947,47 +1939,51 @@ def predecir_figura(ruta_imagen, modelo, device, clases, top=2):
 cells.append(md_cell("""---
 ## 15. Probar el modelo
 
-Selecciona una imagen de una figura de Kuromi o Cinnamoroll
-y el modelo te dira que es.
+Coloca imagenes de Kuromi o Cinnamoroll en la carpeta
+`modelos/` y esta celda las clasificara todas automaticamente.
+
+> ?No hay imagenes ahi ahora? Pon algunas y vuelve a ejecutar esta celda.
 """))
 
-cells.append(code_cell("""# ---
-# Colab: subir imagen
-# ---
+cells.append(code_cell("""# ============================================
+# Prediccion batch desde carpeta
+#
+# ?Que hace: Escanea RUTA_PRUEBAS por imagenes
+#   y corre prediccion en cada una.
+#
+# Cambia RUTA_PRUEBAS si tus imagenes estan en
+# otra carpeta.
+# ============================================
+
+RUTA_PRUEBAS = 'modelos'  # Cambia esta ruta si gustas
+EXTENSIONES = ('.jpg', '.jpeg', '.png', '.webp', '.bmp')
+
 if EN_COLAB:
-    print('Sube una foto de una figura de Kuromi o Cinnamoroll...')
-    archivos = files.upload()
-    if archivos:
-        nombre = list(archivos.keys())[0]
-        img = Image.open(io.BytesIO(archivos[nombre]))
+    from google.colab import files
+    subidos = files.upload()
+    archivos_prueba = list(subidos.keys())
+    for nombre in archivos_prueba:
+        img = Image.open(io.BytesIO(subidos[nombre]))
         predecir_figura(img, model, device, clases)
-    else:
-        print('No se subio ninguna imagen.')
 else:
-    print('Usa la siguiente celda para VSCode.')
-"""))
-
-cells.append(code_cell("""# ---
-# VSCode: seleccionar archivo local
-# ---
-if not EN_COLAB:
-    from tkinter import filedialog, Tk
-    root = Tk()
-    root.withdraw()
-    root.attributes('-topmost', True)
-
-    ruta = filedialog.askopenfilename(
-        title='Selecciona una foto de Kuromi o Cinnamoroll',
-        filetypes=[('Imagenes', '*.png *.jpg *.jpeg *.bmp')]
-    )
-
-    if ruta:
-        resultado, confianza = predecir_figura(ruta, model, device, clases)
-        print('Resultado: {} (Confianza: {:.1f}%)'.format(resultado, confianza))
+    if os.path.isdir(RUTA_PRUEBAS):
+        archivos_prueba = [os.path.join(RUTA_PRUEBAS, f)
+                           for f in os.listdir(RUTA_PRUEBAS)
+                           if f.lower().endswith(EXTENSIONES)]
+        archivos_prueba.sort()
     else:
-        print('No se selecciono ninguna imagen.')
-else:
-    print('Usa la celda anterior (Colab).')
+        archivos_prueba = []
+        print('? La carpeta "%s" no existe.' % RUTA_PRUEBAS)
+
+    if not archivos_prueba:
+        print('No se encontraron imagenes en %s.' % RUTA_PRUEBAS)
+        print('Pon algunas imagenes ahi y ejecuta esta celda de nuevo.')
+    else:
+        print('? Encontradas %d imagen(es) en %s/' % (len(archivos_prueba), RUTA_PRUEBAS))
+        for ruta in archivos_prueba:
+            print()
+            print('--- %s ---' % os.path.basename(ruta))
+            resultado, confianza = predecir_figura(ruta, model, device, clases)
 """))
 
 # ===== SECCION 16: GUARDAR MODELO =====

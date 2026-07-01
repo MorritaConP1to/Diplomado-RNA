@@ -1,0 +1,6 @@
+*
+!app/
+!models/
+!requirements-deploy.txt
+!.env.example
+!Dockerfile

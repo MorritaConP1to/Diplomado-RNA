@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanrio Classifier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0a1a;
+  --surface: #1a0f2e;
+  --surface2: #2d1b4e;
+  --primary: #e8a0bf;
+  --primary-dark: #ff6b9d;
+  --accent: #b8c0ff;
+  --gold: #f0c040;
+  --text: #f0e6ff;
+  --text-dim: #9a8cb8;
+  --danger: #ff4757;
+  --success: #2ed573;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Quicksand', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+.stars {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.stars::after {
+  content: '';
+  position: absolute;
+  width: 100%; height: 100%;
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 160px 120px, #ddd, transparent),
+    radial-gradient(2px 2px at 200px 50px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 300px 200px, #fff, transparent),
+    radial-gradient(1px 1px at 400px 100px, #eee, transparent),
+    radial-gradient(2px 2px at 500px 300px, rgba(255,255,255,0.6), transparent);
+  background-size: 550px 400px;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+@keyframes twinkle {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+header {
+  text-align: center;
+  padding: 30px 0 20px;
+}
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+}
+header p {
+  color: var(--text-dim);
+  font-size: 1rem;
+  margin-top: 5px;
+}
+.subtitle {
+  color: var(--gold);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 20px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid rgba(232, 160, 191, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+}
+.card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+.drop-zone {
+  border: 2px dashed rgba(232, 160, 191, 0.4);
+  border-radius: 12px;
+  padding: 50px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+}
+.drop-zone:hover, .drop-zone.dragover {
+  border-color: var(--primary-dark);
+  background: rgba(255, 107, 157, 0.08);
+}
+.drop-zone .icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+.drop-zone p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+.drop-zone .hint {
+  font-size: 0.8rem;
+  margin-top: 8px;
+  color: rgba(154, 140, 184, 0.6);
+}
+.preview {
+  display: none;
+  position: relative;
+  margin-top: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.preview img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+.preview .overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 8px 12px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  text-align: right;
+}
+.loading {
+  display: none;
+  text-align: center;
+  padding: 30px;
+}
+.loading .spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--surface2);
+  border-top: 3px solid var(--primary-dark);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 12px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.error-box {
+  display: none;
+  background: rgba(255, 71, 87, 0.15);
+  border: 1px solid var(--danger);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: var(--danger);
+  font-size: 0.9rem;
+  margin-top: 12px;
+}
+.result {
+  display: none;
+  margin-top: 16px;
+}
+.result .prediction-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+.result .confidence {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+.bar-container {
+  margin-bottom: 12px;
+}
+.bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+.bar-track {
+  background: var(--surface2);
+  border-radius: 6px;
+  height: 20px;
+  overflow: hidden;
+  position: relative;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  position: relative;
+}
+.bar-fill .bar-value {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+.bar-fill.top1 { background: linear-gradient(90deg, var(--gold), #ff8c00); }
+.bar-fill.top2 { background: linear-gradient(90deg, var(--primary), var(--primary-dark)); }
+.bar-fill.top3 { background: linear-gradient(90deg, var(--accent), #8888cc); }
+.not-sanrio {
+  text-align: center;
+  padding: 40px 20px;
+}
+.not-sanrio .icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+.not-sanrio p {
+  color: var(--text-dim);
+  font-size: 1rem;
+}
+.char-card {
+  display: none;
+  margin-top: 16px;
+  background: rgba(45, 27, 78, 0.5);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(232, 160, 191, 0.15);
+}
+.char-card .char-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.char-card .char-debut {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.char-card .char-desc {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.char-card .char-trivia {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-style: italic;
+  background: rgba(184, 192, 255, 0.08);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.char-card .char-rank {
+  display: inline-block;
+  background: var(--gold);
+  color: #1a0f2e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-top: 8px;
+}
+.chat-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+}
+.chat-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary-dark);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(255, 107, 157, 0.4);
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chat-btn:hover { transform: scale(1.1); }
+.chat-box {
+  display: none;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  width: 340px;
+  height: 450px;
+  background: var(--surface);
+  border: 1px solid rgba(232, 160, 191, 0.3);
+  border-radius: 16px;
+  overflow: hidden;
+  flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+.chat-box.open { display: flex; }
+.chat-header {
+  background: var(--surface2);
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--primary);
+  border-bottom: 1px solid rgba(232, 160, 191, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chat-header .close-btn {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.chat-msgs {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.chat-msgs .msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  animation: fadeIn 0.3s;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.chat-msgs .msg.user {
+  align-self: flex-end;
+  background: var(--surface2);
+  color: var(--text);
+  border-bottom-right-radius: 4px;
+}
+.chat-msgs .msg.bot {
+  align-self: flex-start;
+  background: rgba(232, 160, 191, 0.12);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+}
+.chat-msgs .msg.error {
+  align-self: center;
+  background: rgba(255, 71, 87, 0.15);
+  color: var(--danger);
+  font-size: 0.8rem;
+}
+.chat-input-area {
+  display: flex;
+  padding: 10px 12px;
+  border-top: 1px solid rgba(232, 160, 191, 0.15);
+  gap: 8px;
+}
+.chat-input-area input {
+  flex: 1;
+  background: var(--surface2);
+  border: 1px solid rgba(232, 160, 191, 0.2);
+  border-radius: 20px;
+  padding: 8px 14px;
+  color: var(--text);
+  font-size: 0.85rem;
+  outline: none;
+}
+.chat-input-area input:focus { border-color: var(--primary-dark); }
+.chat-input-area button {
+  background: var(--primary-dark);
+  border: none;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s;
+}
+.chat-input-area button:hover { transform: scale(1.1); }
+footer {
+  text-align: center;
+  padding: 30px 0;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+@media (max-width: 768px) {
+  .main-grid { grid-template-columns: 1fr; }
+  header h1 { font-size: 2rem; }
+  .chat-box { width: 300px; right: -10px; }
+}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+
+<div class="container">
+<header>
+  <div class="subtitle">✦ Sanrio Character Classifier ✦</div>
+  <h1>¿Quién es este Sanrio?</h1>
+  <p>Sube una foto y el modelo reconocerá al personaje entre 30 clases</p>
+</header>
+
+<div class="main-grid">
+  <div class="card">
+    <h2>✨ Sube tu imagen</h2>
+    <div class="drop-zone" id="dropZone">
+      <div class="icon">📸</div>
+      <p>Arrastra una imagen aquí</p>
+      <p>o haz clic para seleccionar</p>
+      <div class="hint">JPG, PNG o WebP · Mín. 32px · Máx. 4000px</div>
+    </div>
+    <input type="file" id="fileInput" accept="image/*" style="display:none">
+    <div class="preview" id="preview">
+      <img id="previewImg" src="" alt="Preview">
+      <div class="overlay" id="previewOverlay"></div>
+    </div>
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <p style="color:var(--text-dim);font-size:0.9rem">Analizando...</p>
+    </div>
+    <div class="error-box" id="errorBox"></div>
+    <div class="result" id="result">
+      <div class="prediction-title" id="predTitle"></div>
+      <div class="confidence" id="predConf"></div>
+      <div id="bars"></div>
+      <div class="char-card" id="charCard">
+        <div class="char-name" id="charName"></div>
+        <div class="char-debut" id="charDebut"></div>
+        <div class="char-desc" id="charDesc"></div>
+        <div class="char-trivia" id="charTrivia"></div>
+        <div class="char-rank" id="charRank"></div>
+      </div>
+    </div>
+    <div class="not-sanrio" id="notSanrio" style="display:none">
+      <div class="icon">🤔</div>
+      <p>No parece un personaje Sanrio conocido,<br>o no estoy segura de cuál es.</p>
+      <p style="font-size:0.8rem;margin-top:8px;color:var(--text-dim)">Podría ser un Sanrio que no está en mi entrenamiento (30 personajes principales) o no ser Sanrio.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🎀 ¿Cómo funciona?</h2>
+    <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.6;margin-bottom:16px">
+      Sube una foto de cualquier personaje Sanrio. El modelo analizará la imagen usando 
+      <strong style="color:var(--primary)">ResNet18 + Transfer Learning</strong> 
+      y te dirá cuál de los <strong style="color:var(--gold)">30 personajes</strong> es, 
+      con su nivel de confianza.
+    </p>
+    <div style="background:var(--surface2);border-radius:12px;padding:16px;margin-bottom:12px">
+      <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:8px">🏆 Ranking 2026</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:0.8rem">
+        <div style="color:var(--gold)">#1 Pompompurin</div>
+        <div style="color:var(--text-dim)">#11 Badtz-Maru</div>
+        <div style="color:var(--gold)">#2 Cinnamoroll</div>
+        <div style="color:var(--text-dim)">#12 Cogimyun</div>
+        <div style="color:var(--gold)">#3 Pochacco</div>
+        <div style="color:var(--text-dim)">#14 Keroppi</div>
+        <div style="color:var(--text-dim)">#4 Kuromi</div>
+        <div style="color:var(--text-dim)">#20 Gudetama</div>
+        <div style="color:var(--text-dim)">#5 Hello Kitty</div>
+        <div style="color:var(--text-dim)">...</div>
+        <div style="color:var(--text-dim)">#6 Pekkle</div>
+        <div style="color:var(--text-dim)">+ 19 más</div>
+      </div>
+    </div>
+    <div style="font-size:0.8rem;color:var(--text-dim);line-height:1.6">
+      <div>🎯 <strong style="color:var(--success)">30 personajes</strong> Sanrio entrenados</div>
+      <div>🤖 Chatbot Gemini integrado (solo habla de Sanrio)</div>
+      <div>🔒 Tu imagen se procesa y elimina al instante</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Hecho con 🎀 por Diana Blanco · Diplomado RNA · UAEM · Julio 2026
+</footer>
+</div>
+
+<div class="chat-widget">
+  <div class="chat-box" id="chatBox">
+    <div class="chat-header">
+      <span>💬 Chat Sanrio</span>
+      <button class="close-btn" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-msgs" id="chatMsgs">
+      <div class="msg bot">¡Hola! 🎀 Soy tu asistente Sanrio. Pregúntame sobre cualquier personaje.</div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="Ej: ¿Quién es Kuromi?" onkeydown="if(event.key==='Enter') sendChat()">
+      <button onclick="sendChat()">➤</button>
+    </div>
+  </div>
+  <button class="chat-btn" onclick="toggleChat()">💬</button>
+</div>
+
+<script>
+let personajesData = {};
+
+fetch('/static/personajes.json').then(r => r.json()).then(d => personajesData = d);
+
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+const preview = document.getElementById('preview');
+const previewImg = document.getElementById('previewImg');
+const loading = document.getElementById('loading');
+const errorBox = document.getElementById('errorBox');
+const result = document.getElementById('result');
+const bars = document.getElementById('bars');
+const predTitle = document.getElementById('predTitle');
+const predConf = document.getElementById('predConf');
+const charCard = document.getElementById('charCard');
+const charName = document.getElementById('charName');
+const charDebut = document.getElementById('charDebut');
+const charDesc = document.getElementById('charDesc');
+const charTrivia = document.getElementById('charTrivia');
+const charRank = document.getElementById('charRank');
+const notSanrio = document.getElementById('notSanrio');
+const previewOverlay = document.getElementById('previewOverlay');
+
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  dropZone.classList.add('dragover');
+});
+dropZone.addEventListener('dragleave', () => {
+  dropZone.classList.remove('dragover');
+});
+dropZone.addEventListener('drop', (e) => {
+  e.preventDefault();
+  dropZone.classList.remove('dragover');
+  if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', (e) => {
+  if (e.target.files.length) handleFile(e.target.files[0]);
+});
+
+function handleFile(file) {
+  if (!file.type.startsWith('image/')) {
+    showError('Solo se aceptan imágenes (JPG, PNG, WebP)');
+    return;
+  }
+  hideAll();
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    previewImg.src = e.target.result;
+    preview.style.display = 'block';
+    dropZone.style.display = 'none';
+    loading.style.display = 'block';
+    predict(file);
+  };
+  reader.readAsDataURL(file);
+}
+
+async function predict(file) {
+  errorBox.style.display = 'none';
+  const form = new FormData();
+  form.append('file', file);
+  try {
+    const res = await fetch('/predict', { method: 'POST', body: form });
+    const data = await res.json();
+    loading.style.display = 'none';
+    if (!data.exito) { showError(data.mensaje); return; }
+    if (!data.prediccion) {
+      notSanrio.style.display = 'block';
+      renderBars(data.top_3, true);
+      return;
+    }
+    predTitle.textContent = data.nombre_mostrar || data.prediccion;
+    const pct = data.confianza.toFixed(1);
+    predConf.textContent = `${pct}% de confianza`;
+    renderBars(data.top_3, false);
+    renderCharCard(data.prediccion);
+    result.style.display = 'block';
+  } catch (err) {
+    loading.style.display = 'none';
+    showError('Error de conexión. ¿El servidor está corriendo?');
+  }
+}
+
+function renderBars(top3, lowConf) {
+  bars.innerHTML = '';
+  const labels = ['1er', '2do', '3er'];
+  const classes = ['top1', 'top2', 'top3'];
+  top3.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'bar-container';
+    div.innerHTML = `
+      <div class="bar-label">
+        <span>${labels[i]}: ${item.nombre_mostrar || item.clase}</span>
+        <span>${item.confianza.toFixed(1)}%</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill ${classes[i]}" style="width:${lowConf ? Math.min(item.confianza, 100) : item.confianza}%">
+          <span class="bar-value">${item.confianza.toFixed(1)}%</span>
+        </div>
+      </div>
+    `;
+    bars.appendChild(div);
+  });
+}
+
+function renderCharCard(clase) {
+  const info = personajesData[clase];
+  if (!info) { charCard.style.display = 'none'; return; }
+  charName.textContent = info.nombre;
+  charDebut.textContent = `Debut: ${info.debut}`;
+  charDesc.textContent = info.descripcion;
+  charTrivia.textContent = `💡 ${info.dato_curioso}`;
+  if (info.ranking_2026) {
+    charRank.style.display = 'inline-block';
+    charRank.textContent = `🏆 Ranking 2026: #${info.ranking_2026}`;
+  } else {
+    charRank.style.display = 'none';
+  }
+  charCard.style.display = 'block';
+}
+
+function showError(msg) {
+  errorBox.textContent = msg;
+  errorBox.style.display = 'block';
+}
+
+function hideAll() {
+  errorBox.style.display = 'none';
+  result.style.display = 'none';
+  notSanrio.style.display = 'none';
+  charCard.style.display = 'none';
+}
+
+function toggleChat() {
+  const box = document.getElementById('chatBox');
+  box.classList.toggle('open');
+}
+
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  const msgs = document.getElementById('chatMsgs');
+  msgs.innerHTML += `<div class="msg user">${msg}</div>`;
+  msgs.scrollTop = msgs.scrollHeight;
+  try {
+    const res = await fetch('/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mensaje: msg })
+    });
+    const data = await res.json();
+    if (data.exito && data.respuesta) {
+      msgs.innerHTML += `<div class="msg bot">${data.respuesta}</div>`;
+    } else {
+      msgs.innerHTML += `<div class="msg error">${data.mensaje || 'Error'}</div>`;
+    }
+  } catch {
+    msgs.innerHTML += `<div class="msg error">Error de conexión</div>`;
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+}
+</script>
+</body>
+</html>

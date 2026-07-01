@@ -1,0 +1,242 @@
+{
+  "hello_kitty": {
+    "nombre": "Hello Kitty",
+    "debut": 1974,
+    "descripcion": "La gata blanca más famosa del mundo. Su nombre real es Kitty White y vive en Londres.",
+    "dato_curioso": "No tiene boca para que la gente pueda proyectar sus propios sentimientos en ella.",
+    "color": "#FF6B9D",
+    "ranking_2026": 5
+  },
+  "my_melody": {
+    "nombre": "My Melody",
+    "debut": 1975,
+    "descripcion": "Una conejita blanca que siempre usa su capucha rosa. Amable y buena onda.",
+    "dato_curioso": "Originalmente se basó en Caperucita Roja. Su mejor amiga es My Sweet Piano.",
+    "color": "#FFB5D8",
+    "ranking_2026": 7
+  },
+  "kuromi": {
+    "nombre": "Kuromi",
+    "debut": 2005,
+    "descripcion": "Una conejita con look punk. Tiene una calavera en la frente pero en realidad es buena onda.",
+    "dato_curioso": "Su nombre viene de 'kurōmi' (黒美) que significa 'belleza negra'. Es la rival de My Melody.",
+    "color": "#2D1B4E",
+    "ranking_2026": 4
+  },
+  "cinnamon": {
+    "nombre": "Cinnamoroll",
+    "debut": 2001,
+    "descripcion": "Un perrito blanco con orejas largas que puede volar. Nació en una nube.",
+    "dato_curioso": "Su cola es tan esponjosa que parece un rollo de canela. Es el personaje más popular de la década.",
+    "color": "#87CEEB",
+    "ranking_2026": 2
+  },
+  "pompompurin": {
+    "nombre": "Pompompurin",
+    "debut": 1996,
+    "descripcion": "Un golden retriever que siempre usa su boina marrón. Le encanta el pudín.",
+    "dato_curioso": "¡Es el #1 del Ranking 2026 por segundo año consecutivo! Su sombrero favorito es una boina.",
+    "color": "#F5DEB3",
+    "ranking_2026": 1
+  },
+  "pochacco": {
+    "nombre": "Pochacco",
+    "debut": 1989,
+    "descripcion": "Un perrito blanco con orejas caídas. Le encanta el deporte y estar al aire libre.",
+    "dato_curioso": "Siempre se le ve con su particular sonrisa y es conocido por ser un gran atleta.",
+    "color": "#98FB98",
+    "ranking_2026": 3
+  },
+  "keroppi": {
+    "nombre": "Keroppi",
+    "debut": 1988,
+    "descripcion": "Una rana verde de grandes ojos que vive en un estanque. Le encanta nadar.",
+    "dato_curioso": "Su nombre viene de 'kerokero', el sonido de las ranas en japonés. Tiene una hermana gemela llamada Pikki.",
+    "color": "#32CD32",
+    "ranking_2026": 14
+  },
+  "badtz_maru": {
+    "nombre": "Badtz-Maru",
+    "debut": 1993,
+    "descripcion": "Un pingüino con actitud de 'malo' pero en realidad es un amor. Vive en Giza, Egipto.",
+    "dato_curioso": "Su nombre significa 'chico malo' en japonés. Tiene una novia llamada Pinguza.",
+    "color": "#4B0082",
+    "ranking_2026": 11
+  },
+  "chococat": {
+    "nombre": "Chococat",
+    "debut": 1996,
+    "descripcion": "Un gato negro con grandes ojos marrones. Siempre está al tanto de lo que pasa.",
+    "dato_curioso": "Sus bigotes son antenas que le permiten saber todo lo que sucede a su alrededor.",
+    "color": "#8B4513",
+    "ranking_2026": null
+  },
+  "tuxedo_sam": {
+    "nombre": "Tuxedo Sam",
+    "debut": 1979,
+    "descripcion": "Un pingüino elegante que siempre usa su moño rojo. Muy serio y formal.",
+    "dato_curioso": "Le encanta la moda y tiene un guardarropa lleno de moños de diferentes colores.",
+    "color": "#4169E1",
+    "ranking_2026": 8
+  },
+  "pekkle": {
+    "nombre": "Pekkle",
+    "debut": 1990,
+    "descripcion": "Un patito blanco con gorrito marinero. ¡Subió del #10 al #6 en el ranking 2026!",
+    "dato_curioso": "Su nombre completo es 'Ahiru no Pekkle'. Es el primer pato en entrar al Top 10 en 31 años.",
+    "color": "#FFD700",
+    "ranking_2026": 6
+  },
+  "hangyodon": {
+    "nombre": "Hangyodon",
+    "debut": 1985,
+    "descripcion": "Un pez azul con boca grande y mirada despistada. Muy popular en los 80s y ahora de regreso.",
+    "dato_curioso": "Su nombre combina 'hangyō' (mitad pescado) y 'don'. Es el único pez en el roster principal.",
+    "color": "#4682B4",
+    "ranking_2026": 9
+  },
+  "little_twin_stars": {
+    "nombre": "Little Twin Stars",
+    "debut": 1975,
+    "descripcion": "Kiki (azul) y Lala (rosa), dos gemelos estrella que vinieron del cielo. Celebrando 50 años.",
+    "dato_curioso": "Son tan antiguos como Hello Kitty y My Melody. Viven en 'Star Cloud'.",
+    "color": "#DDA0DD",
+    "ranking_2026": 10
+  },
+  "gudetama": {
+    "nombre": "Gudetama",
+    "debut": 2013,
+    "descripcion": "Un huevo perezoso que no tiene ganas de hacer nada. El icono de nuestra generación.",
+    "dato_curioso": "¡Tiene su propia serie en Netflix! Su frase favorita es 'gude gude' (flojera en japonés).",
+    "color": "#FFD700",
+    "ranking_2026": 20
+  },
+  "aggretsuko": {
+    "nombre": "Aggretsuko",
+    "debut": 2015,
+    "descripcion": "Una panda roja oficinista que desahoga su estrés cantando death metal en karaoke.",
+    "dato_curioso": "Tiene su propia serie en Netflix con 5 temporadas. Su nombre real es Retsuko.",
+    "color": "#FF6347",
+    "ranking_2026": null
+  },
+  "cogimyun": {
+    "nombre": "Cogimyun",
+    "debut": 2015,
+    "descripcion": "Una criatura de masa de harina que sueña con convertirse en onigiri (bola de arroz).",
+    "dato_curioso": "Ganó el 'Next Kawaii Project' de Sanrio. Se siente muy suave y esponjosa al tacto.",
+    "color": "#FFFACD",
+    "ranking_2026": 12
+  },
+  "my_sweet_piano": {
+    "nombre": "My Sweet Piano",
+    "debut": 1980,
+    "descripcion": "Una ovejita rosa y lanuda. Es la mejor amiga de My Melody.",
+    "dato_curioso": "Tuvo el salto más grande en el ranking 2026: ¡subió del #18 al #13!",
+    "color": "#FFB6C1",
+    "ranking_2026": 13
+  },
+  "hanamaruobake": {
+    "nombre": "Hanamaruobake",
+    "debut": 2023,
+    "descripcion": "Un fantasma amarillo y redondo con una expresión tímida y adorable.",
+    "dato_curioso": "A pesar de ser tan nuevo (debut 2023), ya es #12 en el ranking. ¡Es único en el roster!",
+    "color": "#FFFF00",
+    "ranking_2026": 15
+  },
+  "wish_me_mell": {
+    "nombre": "Wish Me Mell",
+    "debut": 2010,
+    "descripcion": "Una conejita blanca de Francia que ayuda a conectar los sentimientos de las personas.",
+    "dato_curioso": "Tiene la palabra 'mell' escrita en su frente como marca registrada.",
+    "color": "#FF69B4",
+    "ranking_2026": 16
+  },
+  "usahana": {
+    "nombre": "Usahana",
+    "debut": 2000,
+    "descripcion": "Una conejita de colores pastel con motivos florales. Su nombre es un acrónimo en japonés.",
+    "dato_curioso": "Su nombre viene de 'Usagi' (conejo) + 'Hana' (flor). Es súper popular en USA.",
+    "color": "#E6E6FA",
+    "ranking_2026": 17
+  },
+  "gaopowerroo": {
+    "nombre": "Gaopowerroo",
+    "debut": 2007,
+    "descripcion": "Un león bebé amarillo lleno de energía. Siempre está listo para la acción.",
+    "dato_curioso": "Su rugido 'gao gao' le dio nombre. Es el único león en el mundo Sanrio.",
+    "color": "#FFD700",
+    "ranking_2026": 18
+  },
+  "kuririn": {
+    "nombre": "Corocorokuririn",
+    "debut": 1998,
+    "descripcion": "Un hámster dorado redondo y pequeñito. Le encanta rodar y comer semillas.",
+    "dato_curioso": "Su nombre viene de 'kurin kurin' (rodar en japonés). Es una bolita de ternura.",
+    "color": "#DAA520",
+    "ranking_2026": 19
+  },
+  "kirimichan": {
+    "nombre": "Kirimichan",
+    "debut": 2013,
+    "descripcion": "¡Una rebanada de salmón con carita! Quiere ser un platillo delicioso para alguien.",
+    "dato_curioso": "Es literalmente un filete de salmón con ojos. El diseño más unique de todo Sanrio.",
+    "color": "#FA8072",
+    "ranking_2026": null
+  },
+  "marroncream": {
+    "nombre": "Marroncream",
+    "debut": 1990,
+    "descripcion": "Una ardilla marrón que colecciona bellotas y crema de castañas.",
+    "dato_curioso": "Su nombre combina 'marron' (castaña) y 'cream'. Tiene una cola muy esponjosa.",
+    "color": "#CD853F",
+    "ranking_2026": null
+  },
+  "marumofubiyori": {
+    "nombre": "Marumofubiyori",
+    "debut": 2017,
+    "descripcion": "Un oso polar blanco envuelto en una cobija. Le encanta quedarse en casa y relajarse.",
+    "dato_curioso": "Su nombre significa 'día acogedor y redondo'. Es el personaje más 'chill' de Sanrio.",
+    "color": "#F0F8FF",
+    "ranking_2026": null
+  },
+  "charmmykitty": {
+    "nombre": "Charmmy Kitty",
+    "debut": 2004,
+    "descripcion": "La gata persa blanca de Hello Kitty. Tiene un collar con llave que la hace única.",
+    "dato_curioso": "Es la mascota de Hello Kitty. Le encanta el maquillaje y las cosas brillantes.",
+    "color": "#FFE4E1",
+    "ranking_2026": null
+  },
+  "dear_daniel": {
+    "nombre": "Dear Daniel",
+    "debut": 1999,
+    "descripcion": "El novio de Hello Kitty. Un gato azul con gorra marinero. Es muy educado.",
+    "dato_curioso": "Sueña con ser fotógrafo de viajes. Él y Hello Kitty son novios desde la infancia.",
+    "color": "#87CEEB",
+    "ranking_2026": null
+  },
+  "sugarbunnies": {
+    "nombre": "Sugarbunnies",
+    "debut": 2003,
+    "descripcion": "Dos conejitas gemelas: Shiroi (blanca) y Kurimi (crema). Hacen dulces mágicos.",
+    "dato_curioso": "Son conocidas por sus dulces encantados que pueden hacer feliz a quien los come.",
+    "color": "#FFE4B5",
+    "ranking_2026": null
+  },
+  "yoshikitty": {
+    "nombre": "Yoshikitty",
+    "debut": 2009,
+    "descripcion": "Hello Kitty vestida como Yoshiki, el famoso músico de X Japan. Look rockero total.",
+    "dato_curioso": "Es una colaboración única entre Sanrio y Yoshiki. Tiene un estilo visual kei oscuro.",
+    "color": "#800020",
+    "ranking_2026": null
+  },
+  "hello_mimmy": {
+    "nombre": "Hello Mimmy",
+    "debut": 1974,
+    "descripcion": "La gemela de Hello Kitty. Se ve idéntica pero usa un moño amarillo (HK usa rojo).",
+    "dato_curioso": "Es más tímida que Hello Kitty y le encanta hacer manualidades. Usa coletas.",
+    "color": "#FFD700",
+    "ranking_2026": null
+  }
+}
